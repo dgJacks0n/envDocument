@@ -5,7 +5,7 @@
 env_doc: function to easily document the R working environment
 }
 \description{
-Reports out relevant information including system version and user; R version; versions of all included packages; working directory
+Reports out relevant information ablut the script environment including: system version and user; R version; versions of all included packages; working directory.  Results are returned as a list of data frames and echoed to the console (use output="return" to suppress printing)
 
 Note: any packages included AFTER this function is called won't be listed.
 }
@@ -15,6 +15,7 @@ env_doc(system = TRUE, version = TRUE, packages = TRUE, directory = TRUE)
 }
 \arguments{
   \item{system}{
+  TRUE = include system information
 }
   \item{version}{
 }
@@ -22,6 +23,9 @@ env_doc(system = TRUE, version = TRUE, packages = TRUE, directory = TRUE)
 }
   \item{directory}{
 }
+  \item{output}{
+  "print" (default) to print results (also returns as a list of data frames); "return" to suppress printing
+  }
 }
 \details{
 }
