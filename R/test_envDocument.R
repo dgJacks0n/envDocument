@@ -7,7 +7,10 @@
 #' purpose is to print out a lot of machine-specific info.  For now just make
 #' sure it outupts the appropriate sections (system, Rversion and included package envDocument)
 
+# comment out for build/reload, turn back on for development
+# library("envDocument") 
 
-library("envDocument")
 
 env_doc()
+
+envinfo <- env_doc(output="return")
