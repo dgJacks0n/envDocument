@@ -63,40 +63,126 @@ img {
 <div id="header">
 <h1 class="title">test_envDocument</h1>
 <h4 class="author"><em>Donald Jackson (<a href="mailto:donald.jackson@bms.com">donald.jackson@bms.com</a>)</em></h4>
-<h4 class="date"><em>Thu Jun 25 09:26:16 2015</em></h4>
+<h4 class="date"><em>Mon Oct 26 08:51:26 2015</em></h4>
 </div>
 
 
 <p>Note: I’m not sure how to run a true regression test on this package since its purpose is to print out a lot of machine-specific info. For now just make sure it outupts the appropriate sections (system, Rversion and included package envDocument)</p>
-<pre class="r"><code># comment out for build/reload, turn back on for development
-library(&quot;envDocument&quot;) 
+<pre class="r"><code># comment library() out for build/reload, turn back on for use with knitr 
+library(envDocument) </code></pre>
+<p>Calling env_doc with defaults returns a single data frame of information about the environment</p>
+<pre class="r"><code>info &lt;- env_doc()</code></pre>
+<p>Calling with “print” will print the data frame</p>
+<pre class="r"><code>env_doc(&quot;print&quot;)</code></pre>
+<pre><code>##     Section           Name
+## 1    System        sysname
+## 2    System        release
+## 3    System        version
+## 4    System       nodename
+## 5    System        machine
+## 6    System          login
+## 7    System           user
+## 8    System effective_user
+## 9    System      Directory
+## 10        R        Version
+## 11 Packages    envDocument
+## 12   Script           Path
+## 13   Script       Modified
+##                                                            Value
+## 1                                                        Windows
+## 2                                                              7
+## 3                                     build 7601, Service Pack 1
+## 4                                                        R9HFB71
+## 5                                                            x86
+## 6                                                        jacksod
+## 7                                                        jacksod
+## 8                                                        jacksod
+## 9                     C:/Users/jacksod/Documents/R/envDocument/R
+## 10                                  R version 3.1.3 (2015-03-09)
+## 11                                      2.1.1 BMS BMS 2015-10-24
+## 12 C:/Users/jacksod/Documents/R/envDocument/R/test_envDocument.R
+## 13                                           2015-10-26 08:51:24</code></pre>
+<pre><code>## NULL</code></pre>
+<p>This df can be pretty-printed as a table in a knitr report Set the knitr chunk option results to “asis” or the table will be prefixed with comments</p>
+<pre class="r"><code>knitr::opts_chunk$set(results=&quot;asis&quot;)
 
-
-env_doc()</code></pre>
-<pre><code>## $System
-##             Name                      Value
-## 1        sysname                    Windows
-## 2        release                      7 x64
-## 3        version build 7601, Service Pack 1
-## 4       nodename                 4CZ1300Y3N
-## 5        machine                     x86-64
-## 6          login                    jacksod
-## 7           user                    jacksod
-## 8 effective_user                    jacksod
-## 
-## $R
-##   Version Build_Date
-## 1   3.1.3 2015-03-09
-## 
-## $Packages
-##          Name Version Repository Build_Date
-## 1 envDocument     1.0        BMS 2015-03-11
-## 
-## $Directory
-##                                                     Path
-## 1 C:/Users/jacksod/Documents/R/gitProjects/envDocument/R</code></pre>
-<pre class="r"><code>envinfo &lt;- env_doc(output=&quot;return&quot;)</code></pre>
-<p>try using inline 2015-06-25</p>
+knitr::kable(info)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Section</th>
+<th align="left">Name</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">System</td>
+<td align="left">sysname</td>
+<td align="left">Windows</td>
+</tr>
+<tr class="even">
+<td align="left">System</td>
+<td align="left">release</td>
+<td align="left">7</td>
+</tr>
+<tr class="odd">
+<td align="left">System</td>
+<td align="left">version</td>
+<td align="left">build 7601, Service Pack 1</td>
+</tr>
+<tr class="even">
+<td align="left">System</td>
+<td align="left">nodename</td>
+<td align="left">R9HFB71</td>
+</tr>
+<tr class="odd">
+<td align="left">System</td>
+<td align="left">machine</td>
+<td align="left">x86</td>
+</tr>
+<tr class="even">
+<td align="left">System</td>
+<td align="left">login</td>
+<td align="left">jacksod</td>
+</tr>
+<tr class="odd">
+<td align="left">System</td>
+<td align="left">user</td>
+<td align="left">jacksod</td>
+</tr>
+<tr class="even">
+<td align="left">System</td>
+<td align="left">effective_user</td>
+<td align="left">jacksod</td>
+</tr>
+<tr class="odd">
+<td align="left">System</td>
+<td align="left">Directory</td>
+<td align="left">C:/Users/jacksod/Documents/R/envDocument/R</td>
+</tr>
+<tr class="even">
+<td align="left">R</td>
+<td align="left">Version</td>
+<td align="left">R version 3.1.3 (2015-03-09)</td>
+</tr>
+<tr class="odd">
+<td align="left">Packages</td>
+<td align="left">envDocument</td>
+<td align="left">2.1.1 BMS BMS 2015-10-24</td>
+</tr>
+<tr class="even">
+<td align="left">Script</td>
+<td align="left">Path</td>
+<td align="left">C:/Users/jacksod/Documents/R/envDocument/R/test_envDocument.R</td>
+</tr>
+<tr class="odd">
+<td align="left">Script</td>
+<td align="left">Modified</td>
+<td align="left">2015-10-26 08:51:24</td>
+</tr>
+</tbody>
+</table>
 
 
 </div>
