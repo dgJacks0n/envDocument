@@ -95,7 +95,7 @@ get_scriptpath <- function() {
     # get name of script - hope this is consisitent!
     path <- as.character(sys.call(1))[2] 
     # make sure we got a file that ends in .R
-    if (length( grep("..+\\.R$", path, perl=TRUE) ) > 0) {
+    if (grepl("..+\\.[R|.Rmd$]", path, perl=TRUE) )  {
       return(path)
     } else { 
       message("Obtained value for path does not end with .R ", path)
