@@ -7,5 +7,5 @@ and/or formatting (for example with knitr::kable())
 
 #Installation
 Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
-`devtools::install_git("http://biogit.pri.bms.com/jacksod/envDocument", subdir="envDocument", repos=BiocInstaller::biocinstallRepos())`   
+`devtools::install_git("http://biogit.pri.bms.com/jacksod/envDocument", subdir="envDocument")`   
 *Thanks to John Thompson for providing this devtools command!*
