@@ -5,7 +5,7 @@
 # sure it outupts the appropriate sections (system, Rversion and included package envDocument)
 
 # comment library() out for build/reload, turn back on for use with knitr 
-# library(envDocument) 
+# library(envDocument)
 
 # Calling env_doc with defaults returns a single data frame of information
 # about the environment
