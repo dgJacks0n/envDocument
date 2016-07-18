@@ -78,6 +78,7 @@ get_scriptinfo <- function() {
   return(scrinfo)
 }
 
+#' get_scriptpath
 #' Get the path of the calling script
 #' 
 #' Returns the full path of the script that called this function (if any)
@@ -95,7 +96,7 @@ get_scriptpath <- function() {
     # get name of script - hope this is consisitent!
     path <- as.character(sys.call(1))[2] 
     # make sure we got a file that ends in .R
-    if (grepl("..+\\.[R|.Rmd$]", path, perl=TRUE) )  {
+    if (grepl("..+\\.[R|.Rmd|Rnw$]", path, perl=TRUE, ignore.case = TRUE) )  {
       return(path)
     } else { 
       message("Obtained value for path does not end with .R ", path)
@@ -106,6 +107,92 @@ get_scriptpath <- function() {
   }
   return(path)
 }
+
+# getRepo: get git repository from path
+getRepo <- function(testPath) {
+  # get location of repo that controls testPath
+  repoPath <- git2r::discover_repository(testPath)
+  
+  if(is.null(repoPath)) {
+    warning("Could not find repo directory for ", testPath)
+    return(NULL)
+  }
+  
+  repo <- git2r::repository(repoPath)
+  
+  # is file tracked in repo?
+  untracked <- git2r::status(repo, staged = FALSE, unstaged = FALSE, untracked = TRUE)
+  
+  if(normalizePath(testPath) %in% normalizePath(unlist(untracked))) {
+    warning("File ", testPath, " is not tracked in repostitory ", repoPath)
+    return(NULL)
+  }
+  
+  return(repo)
+  
+}
+
+# has file been modified?
+fileStatus <- function(repo, testPath) {
+  testStatus <- NULL
+  
+  statusVals <- unlist(git2r::status(repo))
+  hasStatus <-  normalizePath(testPath) == normalizePath(statusVals)
+  
+  if(any(hasStatus)) {
+    testStatus <- paste(names(statusVals[hasStatus]), collapse = ", ")
+  } else {
+    testStatus <- "committed"
+  }
+  
+  return(testStatus)
+}
+
+
+
+#' get_gitInfo: Get git information from repository
+#' 
+get_gitInfo <- function() {
+  scriptPath <- get_scriptpath()
+  
+  if(is.null(scriptPath)) {
+    return(NULL)
+  }
+  
+  scriptRepo <- getRepo(scriptPath)
+  
+  if(is.null(scriptRepo)) {
+    return(NULL)
+  }
+  
+  # get tags
+  tagList <- git2r::tags(scriptRepo)
+  if(length(tagList) > 0) {
+    tag <- tagList[[length(tagList)]]
+  } else {
+    tag <- NULL
+  }
+  
+  # get last commit info
+  lastCommit <- as(git2r::commits(scriptRepo)[[1]], "data.frame")
+  
+  # has the file been changed since last commit
+  changed <- fileStatus(scriptRepo, scriptPath)
+  
+  results <- data.frame( Name = "Tag",  Value = tag,
+                         Name = "Commit Hash", value = lastCommit$sha,
+                         Name = "Commit Time", value = lastCommit$when,
+                         Name = "Status", value = changed)
+  
+  results$Section = "Git"
+  
+  return(results)
+}
+
+
+
+
+
 
 #' Get system information
 #'   
@@ -140,13 +227,14 @@ get_sysinfo <- function() {
 #'  @param version Include R version?  Default TRUE
 #'  @param packages Include packages with repository and version from get_packageinfo()? Default TRUE
 #'  @param script Include script path and modification time from get_scriptinfo()? Default TRUE
+#'  @param git Include git repository information? from get_gitInfo?  Default TRUE
 #'  
 #'  @examples
 #'  env_doc("print") # print information to stdout
 #'  info <- env_doc() # return information as a consolidated data frame
 
 env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE, 
-                      packages=TRUE, script=TRUE ) {
+                      packages=TRUE, script=TRUE, git = TRUE ) {
   
   envinfo <- list()
   
@@ -164,6 +252,10 @@ env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE,
   
   if(script) {
     envinfo$Script <- get_scriptinfo()
+  }
+  
+  if(git) {
+    envinfo$Git <- get_gitInfo()
   }
   
   # flatten list to data frame
