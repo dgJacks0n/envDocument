@@ -1,10 +1,10 @@
 Package: envDocument
 Type: Package
 Title: Document the R working environment
-Version: 2.1.1
-Date: 2015-10-24
+Version: 2.2
+Date: 2016-07-09
 Author: Donald Jackson <donald.jackson@bms.com>
 Maintainer: Donald Jackson <donald.jackson@bms.com>
 Description: Prints out information about the R working environment (system, R version,included packages and versions) from a single function "env_doc()"
 License: Internal use
-Repository: BMS
+Suggests: git2r(>= 0.15.0)
