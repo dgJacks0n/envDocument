@@ -21,3 +21,5 @@ knitr::opts_chunk$set(results="asis")
 
 knitr::kable(info)
 
+# change to trigger git status
+message("Done")
