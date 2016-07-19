@@ -148,50 +148,77 @@ fileStatus <- function(repo, testPath) {
   return(testStatus)
 }
 
+#' getTag: return git tag information if relavant
+#' Requires that repostiory have tags and that sha for last tag
+#' and last commit match.  
+getTag <- function(repo) {
+  tagString <- NULL
+  
+  # get tags
+  tagList <- git2r::tags(repo)
+  
+  # Abort if no tags in repo
+  if(length(tagList) ==  0) {
+    return(NULL)
+  }
+  
+  tag <- tagList[[length(tagList)]]
+  
+  # do tags match?  If not, return NULL
+  if(tag@sha != commits(repo)[[1]]@sha) {
+    return(NULL)
+  }
+    
+  
+  tagString <- paste( "[", substring(tag@target, 1,6), "] ", tag@name, sep = "" )
+  return(tagString)
+
+}
 
 
 #' get_gitInfo: Get git information from repository
 #' 
-get_gitInfo <- function() {
-  scriptPath <- get_scriptpath()
+get_gitInfo <- function(scriptPath = "") {
   
-  if(is.null(scriptPath)) {
+  if(scriptPath == "") {
+    scriptPath <- get_scriptpath()
+  }
+  
+  if(is.null(scriptPath) | is.na(scriptPath)) {
+    warning("Could not determine script path, unable to look up git information")
     return(NULL)
   }
+  
+  scriptPath <- path.expand(scriptPath)
   
   scriptRepo <- getRepo(scriptPath)
   
   if(is.null(scriptRepo)) {
+    # getRepo will throw the warning...
     return(NULL)
   }
   
-  # get tags
-  tagList <- git2r::tags(scriptRepo)
-  if(length(tagList) > 0) {
-    tag <- tagList[[length(tagList)]]
-  } else {
-    tag <- NULL
-  }
   
   # get last commit info
-  lastCommit <- as(git2r::commits(scriptRepo)[[1]], "data.frame")
-  
+  lastCommit <- as(scriptRepo, "data.frame")[1,]
+
   # has the file been changed since last commit
   changed <- fileStatus(scriptRepo, scriptPath)
   
-  results <- data.frame( Name = "Tag",  Value = tag,
-                         Name = "Commit Hash", value = lastCommit$sha,
-                         Name = "Commit Time", value = lastCommit$when,
-                         Name = "Status", value = changed)
+  results <- data.frame( Name = c("Commit Hash", "Commit Time", "Status"),
+                         Value = c(substring(lastCommit$sha, 1, 7), lastCommit$when, changed) )
+  
+  # see if commit is tagged
+  tagString <- getTag(scriptRepo)
+  
+  if(!is.null(tagString)) {
+    results <- rbind(results, data.frame( Name = "Tag", Value = tagString))
+  }
   
   results$Section = "Git"
   
   return(results)
 }
-
-
-
-
 
 
 #' Get system information
@@ -227,7 +254,7 @@ get_sysinfo <- function() {
 #'  @param version Include R version?  Default TRUE
 #'  @param packages Include packages with repository and version from get_packageinfo()? Default TRUE
 #'  @param script Include script path and modification time from get_scriptinfo()? Default TRUE
-#'  @param git Include git repository information? from get_gitInfo?  Default TRUE
+#'  @param git Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE
 #'  
 #'  @examples
 #'  env_doc("print") # print information to stdout
@@ -255,6 +282,11 @@ env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE,
   }
   
   if(git) {
+    # is git2r installed?
+    if(!requireNamespace("git2r", quietly = TRUE)) {
+      stop("Function get_gitinfo requires package git2r.  Either install it or use env_doc(git = FALSE)")
+    }
+    
     envinfo$Git <- get_gitInfo()
   }
   
