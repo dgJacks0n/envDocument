@@ -95,11 +95,11 @@ get_scriptpath <- function() {
   if(!is.null(sys.calls())) {
     # get name of script - hope this is consisitent!
     path <- as.character(sys.call(1))[2] 
-    # make sure we got a file that ends in .R
-    if (grepl("..+\\.[R|.Rmd|Rnw$]", path, perl=TRUE, ignore.case = TRUE) )  {
+    # make sure we got a file that ends in .R, .Rmd or .Rnw
+    if (grepl("..+\\.[R|Rmd|Rnw]", path, perl=TRUE, ignore.case = TRUE) )  {
       return(path)
     } else { 
-      message("Obtained value for path does not end with .R ", path)
+      message("Obtained value for path does not end with .R, .Rmd or .Rnw: ", path)
     }
   } else{
   # Rscript and R -f put it in commandArgs
@@ -113,6 +113,7 @@ getRepo <- function(testPath) {
   # get location of repo that controls testPath
   repoPath <- git2r::discover_repository(testPath)
   
+  
   if(is.null(repoPath)) {
     warning("Could not find repo directory for ", testPath)
     return(NULL)
@@ -120,12 +121,18 @@ getRepo <- function(testPath) {
   
   repo <- git2r::repository(repoPath)
   
+  
   # is file tracked in repo?
   untracked <- git2r::status(repo, staged = FALSE, unstaged = FALSE, untracked = TRUE)
   
-  if(normalizePath(testPath) %in% normalizePath(unlist(untracked))) {
-    warning("File ", testPath, " is not tracked in repostitory ", repoPath)
-    return(NULL)
+
+  if(length(untracked[["untracked"]]) > 0) {
+    repoRoot <- sub("/.git/", "", repoPath,  fixed = TRUE)
+    
+    if(normalizePath(testPath) %in% normalizePath(paste(repoRoot, unlist(untracked), sep = "/"))) {
+      warning("File ", testPath, " is not tracked in repostitory ", repoPath)
+      return(NULL)
+    }
   }
   
   return(repo)
@@ -136,8 +143,11 @@ getRepo <- function(testPath) {
 fileStatus <- function(repo, testPath) {
   testStatus <- NULL
   
+  # need to get top level path for repo
+  repoRoot <- sub("/.git/", "", repo@path,  fixed = TRUE)
+  
   statusVals <- unlist(git2r::status(repo))
-  hasStatus <-  normalizePath(testPath) == normalizePath(statusVals)
+  hasStatus <-  normalizePath(testPath) == normalizePath(paste(repoRoot, statusVals, sep = "/"))
   
   if(any(hasStatus)) {
     testStatus <- paste(names(statusVals[hasStatus]), collapse = ", ")
@@ -165,7 +175,7 @@ getTag <- function(repo) {
   tag <- tagList[[length(tagList)]]
   
   # do tags match?  If not, return NULL
-  if(tag@sha != commits(repo)[[1]]@sha) {
+  if(tag@sha != git2r::commits(repo)[[1]]@sha) {
     return(NULL)
   }
     
@@ -189,7 +199,7 @@ get_gitInfo <- function(scriptPath = "") {
     return(NULL)
   }
   
-  scriptPath <- path.expand(scriptPath)
+  # scriptPath <- path.expand(scriptPath)
   
   scriptRepo <- getRepo(scriptPath)
   
