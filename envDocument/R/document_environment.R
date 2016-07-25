@@ -115,7 +115,6 @@ get_scriptpath <- function() {
 #' Get git repository from path
 #' 
 #' @praram testPath 
-#' @example  getRepo(path)
 #' 
 
 getRepo <- function(testPath) {
@@ -174,8 +173,6 @@ fileStatus <- function(repo, testPath) {
 #' and last commit match.  
 #' 
 #' @param repo
-#' @example 
-#' lastTag <- getTag(repo)
 #' 
 getTag <- function(repo) {
   tagString <- NULL
@@ -206,9 +203,8 @@ getTag <- function(repo) {
 #' 
 #' Get git information from repository
 #' 
-#' @param script (optional, defaults to get_scriptPath())
-#' @example 
-#' git_info <- get_gitInfo
+#' @param script 
+#' (optional, defaults to get_scriptPath())
 #' 
 get_gitInfo <- function(scriptPath = "") {
   
@@ -256,7 +252,7 @@ get_gitInfo <- function(scriptPath = "") {
 #' Get system information
 #'   
 #' Get system information: OS, hostname, userid, working directory as a data frame
-#' @param None
+#' @param none
 #' @examples get_sysinfo()
 
 get_sysinfo <- function() {
