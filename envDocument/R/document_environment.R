@@ -51,10 +51,11 @@ get_rversion <- function() {
   
 }
 
-
+#' get_scriptinfo
+#' 
 #' Get information about the  calling script 
 #' 
-#' file name and path, last modification time.  
+#' Results include file name and path, last modification time.  
 #' Currently this works if the script was called via source(),
 #' knitr::spin() or Rstudio's _compile notebook_ (ctrl-shift-K).
 #' It does not work if the script was called via 'R -f' or 'Rscript'.
@@ -79,6 +80,7 @@ get_scriptinfo <- function() {
 }
 
 #' get_scriptpath
+#' 
 #' Get the path of the calling script
 #' 
 #' Returns the full path of the script that called this function (if any)
@@ -108,7 +110,14 @@ get_scriptpath <- function() {
   return(path)
 }
 
-# getRepo: get git repository from path
+#' getRepo
+#' 
+#' Get git repository from path
+#' 
+#' @praram testPath 
+#' @example  getRepo(path)
+#' 
+
 getRepo <- function(testPath) {
   # get location of repo that controls testPath
   repoPath <- git2r::discover_repository(testPath)
@@ -158,9 +167,16 @@ fileStatus <- function(repo, testPath) {
   return(testStatus)
 }
 
-#' getTag: return git tag information if relavant
+#' getTag
+#' 
+#' Return git tag information if relavant
 #' Requires that repostiory have tags and that sha for last tag
 #' and last commit match.  
+#' 
+#' @param repo
+#' @example 
+#' lastTag <- getTag(repo)
+#' 
 getTag <- function(repo) {
   tagString <- NULL
   
@@ -186,7 +202,13 @@ getTag <- function(repo) {
 }
 
 
-#' get_gitInfo: Get git information from repository
+#' get_gitInfo
+#' 
+#' Get git information from repository
+#' 
+#' @param script (optional, defaults to get_scriptPath())
+#' @example 
+#' git_info <- get_gitInfo
 #' 
 get_gitInfo <- function(scriptPath = "") {
   
@@ -249,14 +271,20 @@ get_sysinfo <- function() {
   return(sysinfo) 
 }
 
-#' Environment info
+#' env_doc
 #' 
 #' Document the working environment for a script including:
 #' 
 #'- System version (OS, version, user, working directory)
+#'
 #'- R version
+#'
 #'- Package names and versions
+#'
 #'- Top-level script name and modification time
+#'
+#'- Git hash, status and tag (if any; requires git2r)
+#'
 #'
 #' @param output How should output be handled? return: return as a data frame (default);
 #'  print: print to stdout
