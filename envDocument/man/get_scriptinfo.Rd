@@ -19,6 +19,5 @@ A later version should capture additional cases.
 }
 \examples{
 scriptinfo <- get_scriptinfo()
-
 }
 

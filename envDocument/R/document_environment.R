@@ -5,7 +5,7 @@
 #' @param none
 #' @examples
 #' packages <- get_packageinfo
-
+#' @export
 get_packageinfo <- function() {
   packages <- sessionInfo()["otherPkgs"]$otherPkgs
   pkginfo <- data.frame()
@@ -16,9 +16,9 @@ get_packageinfo <- function() {
   return(pkginfo)
 }
 
-#' get_thispackageinfo
-#'
-#' extract selected info on individual packages.  Called by get_packageinfo
+# get_thispackageinfo
+#
+# extract selected info on individual packages.  Called by get_packageinfo
 
 get_thispackageinfo <- function(thisPackage){
   thisinfo <- data.frame( Section = "Packages",
@@ -42,7 +42,7 @@ get_thispackageinfo <- function(thisPackage){
 #' @param none
 #' @examples
 #' Rversion <- get_rversion()
-
+#' @export
 get_rversion <- function() {
   rv <- R.Version()
   rinfo <- data.frame(Section = "R", Name = "Version", Value = R.version.string
@@ -63,8 +63,9 @@ get_rversion <- function() {
 #' A later version should capture additional cases.
 #' 
 #' @param none
-#' @examples scriptinfo <- get_scriptinfo()
-#' 
+#' @examples 
+#' scriptinfo <- get_scriptinfo()
+#' @export
 get_scriptinfo <- function() {
   mtime <- NULL
   path <- get_scriptpath()
@@ -87,8 +88,9 @@ get_scriptinfo <- function() {
 #' or NULL if path is not available
 #' 
 #' @param none
-#' @examples mypath <- get_scriptpath()
-
+#' @examples 
+#' mypath <- get_scriptpath()
+#' @export
 get_scriptpath <- function() {
   # location of script can depend on how it was invoked:
   # source() and knit() put it in sys.calls()
@@ -110,13 +112,12 @@ get_scriptpath <- function() {
   return(path)
 }
 
-#' getRepo
-#' 
-#' Get git repository from path
-#' 
-#' @praram testPath 
-#' 
-
+# getRepo
+# 
+# Get git repository from path
+# 
+# @praram testPath 
+# 
 getRepo <- function(testPath) {
   # get location of repo that controls testPath
   repoPath <- git2r::discover_repository(testPath)
@@ -147,6 +148,7 @@ getRepo <- function(testPath) {
   
 }
 
+# fileStatus: check if file has been modified since last commit
 # has file been modified?
 fileStatus <- function(repo, testPath) {
   testStatus <- NULL
@@ -166,14 +168,13 @@ fileStatus <- function(repo, testPath) {
   return(testStatus)
 }
 
-#' getTag
-#' 
-#' Return git tag information if relavant
-#' Requires that repostiory have tags and that sha for last tag
-#' and last commit match.  
-#' 
-#' @param repo
-#' 
+# getTag
+# 
+# Return git tag information if relavant
+# Requires that repostiory have tags and that sha for last tag
+# and last commit match.  
+# 
+# @param repo
 getTag <- function(repo) {
   tagString <- NULL
   
@@ -203,9 +204,10 @@ getTag <- function(repo) {
 #' 
 #' Get git information from repository
 #' 
-#' @param script 
-#' (optional, defaults to get_scriptPath())
-#' 
+#' @param script path to script (optional, defaults to get_scriptPath())
+#' @examples
+#' get_gitinfo()
+#' @export
 get_gitInfo <- function(scriptPath = "") {
   
   if(scriptPath == "") {
@@ -254,7 +256,7 @@ get_gitInfo <- function(scriptPath = "") {
 #' Get system information: OS, hostname, userid, working directory as a data frame
 #' @param none
 #' @examples get_sysinfo()
-
+#' @export
 get_sysinfo <- function() {
   sysinfo <- data.frame( Section = "System",
                          Name = names(Sys.info()), 
@@ -267,9 +269,8 @@ get_sysinfo <- function() {
   return(sysinfo) 
 }
 
-#' env_doc
-#' 
-#' Document the working environment for a script including:
+# env_doc
+#' \code{env_doc} reports the working environment for a script including:
 #' 
 #'- System version (OS, version, user, working directory)
 #'
@@ -279,21 +280,20 @@ get_sysinfo <- function() {
 #'
 #'- Top-level script name and modification time
 #'
-#'- Git hash, status and tag (if any; requires git2r)
+#'- Git hash, status and tag (if any; requires \code{\link{git2r}})
 #'
 #'
-#' @param output How should output be handled? return: return as a data frame (default);
-#'  print: print to stdout
-#'  @param system Include OS info from get_sysinfo()? Default TRUE
-#'  @param version Include R version?  Default TRUE
-#'  @param packages Include packages with repository and version from get_packageinfo()? Default TRUE
-#'  @param script Include script path and modification time from get_scriptinfo()? Default TRUE
-#'  @param git Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE
+#' @param output How should output be handled? return: return as a data frame (default); print: print to stdout
+#' @param system Include OS info from get_sysinfo()? Default TRUE
+#' @param version Include R version?  Default TRUE
+#' @param packages Include packages with repository and version from get_packageinfo()? Default TRUE
+#' @param script Include script path and modification time from get_scriptinfo()? Default TRUE
+#' @param git Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE
 #'  
-#'  @examples
+#' @examples
 #'  env_doc("print") # print information to stdout
 #'  info <- env_doc() # return information as a consolidated data frame
-
+#' @export
 env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE, 
                       packages=TRUE, script=TRUE, git = TRUE ) {
   

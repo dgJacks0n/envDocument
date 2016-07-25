@@ -2,36 +2,38 @@
 % Please edit documentation in R/document_environment.R
 \name{env_doc}
 \alias{env_doc}
-\title{env_doc}
+\title{\code{env_doc} reports the working environment for a script including:}
 \usage{
 env_doc(output = c("return", "print"), system = TRUE, version = TRUE,
   packages = TRUE, script = TRUE, git = TRUE)
 }
 \arguments{
-\item{output}{How should output be handled? return: return as a data frame (default);
-print: print to stdout
-@param system Include OS info from get_sysinfo()? Default TRUE
-@param version Include R version?  Default TRUE
-@param packages Include packages with repository and version from get_packageinfo()? Default TRUE
-@param script Include script path and modification time from get_scriptinfo()? Default TRUE
-@param git Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE
+\item{output}{How should output be handled? return: return as a data frame (default); print: print to stdout}
 
-@examples
-env_doc("print") # print information to stdout
-info <- env_doc() # return information as a consolidated data frame}
+\item{system}{Include OS info from get_sysinfo()? Default TRUE}
+
+\item{version}{Include R version?  Default TRUE}
+
+\item{packages}{Include packages with repository and version from get_packageinfo()? Default TRUE}
+
+\item{script}{Include script path and modification time from get_scriptinfo()? Default TRUE}
+
+\item{git}{Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE}
 }
 \description{
-Document the working environment for a script including:
+- System version (OS, version, user, working directory)
 }
 \details{
-- System version (OS, version, user, working directory)
-
 - R version
 
 - Package names and versions
 
 - Top-level script name and modification time
 
-- Git hash, status and tag (if any; requires git2r)
+- Git hash, status and tag (if any; requires \code{\link{git2r}})
+}
+\examples{
+ env_doc("print") # print information to stdout
+ info <- env_doc() # return information as a consolidated data frame
 }
 

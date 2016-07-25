@@ -7,9 +7,12 @@
 get_gitInfo(scriptPath = "")
 }
 \arguments{
-\item{script}{(optional, defaults to get_scriptPath())}
+\item{script}{path to script (optional, defaults to get_scriptPath())}
 }
 \description{
 Get git information from repository
+}
+\examples{
+get_gitinfo()
 }
 

@@ -5,9 +5,7 @@ Version: 2.2
 Date: 2016-07-09
 Author: Donald Jackson <donald.jackson@bms.com>
 Maintainer: Donald Jackson <donald.jackson@bms.com>
-Description: Prints out information about the R working environment (system, R
-    version,included packages and versions) from a single function "env_doc()"
+Description: Prints out information about the R working environment (system, R version,included packages and versions) from a single function "env_doc()"
 License: Internal use
-Suggests:
-    git2r(>= 0.15.0)
+Suggests: git2r(>= 0.15.0)
 RoxygenNote: 5.0.1
