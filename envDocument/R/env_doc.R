@@ -1,32 +1,39 @@
 #' env_doc
-#' \code{env_doc} reports the working environment
 #' 
-#' Returns a data frame with information about the script, system
-#' and environment
+#' Reports the working environment in which an analysis was performed.
 #' 
-#'- System version (OS, version, user, working directory)
-#'
-#'- R version
-#'
-#'- Package names and versions
-#'
-#'- Top-level script name and modification time
-#'
-#'- Git hash, status and tag (if any; requires \code{\link{git2r}})
-#'
+#' Prints or returns a data frame with the following information:  
+#' - System version (OS, version, user, working directory)  
+#' 
+#' - R version  
+#' 
+#' - Package names and versions  
+#' 
+#' - Top-level script name and modification time  
+#' 
+#' - Git hash, status and tag (if any; requires package git2r)  
 #'
 #' @param output How should output be handled? return: return as a 
 #'   data frame (default); print: print to stdout
-#' @param system Include OS info from get_sysinfo()? Default TRUE
-#' @param version Include R version?  Default TRUE
-#' @param packages Include packages with repository and version from get_packageinfo()? Default TRUE
-#' @param script Include script path and modification time from get_scriptinfo()? Default TRUE
-#' @param git Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE
+#' @param system Include OS info from \code{\link{get_sysinfo}}? Boolean, 
+#'   default TRUE
+#' @param version Include R version from \code{\link{get_rversion}}?  
+#'   Boolean, default TRUE
+#' @param packages Include attached packages with repository and version from 
+#'   \code{\link{get_packageinfo}}? Boolean, default TRUE
+#' @param script Include script path and modification time from 
+#'   \code{\link{get_scriptinfo}}? Boolean, default TRUE
+#' @param git Include git repository information? from \code{\link{get_gitInfo}}
+#'   (note: requires git2r)?  Boolean, default TRUE
+#'   
+#' @return A data frame with columns for information type, variable name and 
+#'   value.
 #'  
 #' @examples
 #'  env_doc("print") # print information to stdout
 #'  info <- env_doc() # return information as a consolidated data frame
 #' @export
+#' 
 env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE, 
                       packages=TRUE, script=TRUE, git = TRUE ) {
   

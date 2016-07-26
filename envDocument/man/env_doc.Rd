@@ -2,8 +2,7 @@
 % Please edit documentation in R/env_doc.R
 \name{env_doc}
 \alias{env_doc}
-\title{env_doc
-\code{env_doc} reports the working environment}
+\title{env_doc}
 \usage{
 env_doc(output = c("return", "print"), system = TRUE, version = TRUE,
   packages = TRUE, script = TRUE, git = TRUE)
@@ -12,21 +11,30 @@ env_doc(output = c("return", "print"), system = TRUE, version = TRUE,
 \item{output}{How should output be handled? return: return as a 
 data frame (default); print: print to stdout}
 
-\item{system}{Include OS info from get_sysinfo()? Default TRUE}
+\item{system}{Include OS info from \code{\link{get_sysinfo}}? Boolean, 
+default TRUE}
 
-\item{version}{Include R version?  Default TRUE}
+\item{version}{Include R version from \code{\link{get_rversion}}?
+Boolean, default TRUE}
 
-\item{packages}{Include packages with repository and version from get_packageinfo()? Default TRUE}
+\item{packages}{Include attached packages with repository and version from 
+\code{\link{get_packageinfo}}? Boolean, default TRUE}
 
-\item{script}{Include script path and modification time from get_scriptinfo()? Default TRUE}
+\item{script}{Include script path and modification time from 
+\code{\link{get_scriptinfo}}? Boolean, default TRUE}
 
-\item{git}{Include git repository information? from get_gitInfo (note: requires git2r)?  Default TRUE}
+\item{git}{Include git repository information? from \code{\link{get_gitInfo}}
+(note: requires git2r)?  Boolean, default TRUE}
+}
+\value{
+A data frame with columns for information type, variable name and 
+  value.
 }
 \description{
-Returns a data frame with information about the script, system
-and environment
+Reports the working environment in which an analysis was performed.
 }
 \details{
+Prints or returns a data frame with the following information:  
 - System version (OS, version, user, working directory)
 
 - R version
@@ -35,7 +43,7 @@ and environment
 
 - Top-level script name and modification time
 
-- Git hash, status and tag (if any; requires \code{\link{git2r}})
+- Git hash, status and tag (if any; requires package git2r)
 }
 \examples{
  env_doc("print") # print information to stdout
