@@ -9,8 +9,10 @@ Rmarkdown file to test envDocument::env_doc()
 
 ```{r}
 library(envDocument) # build & reload doesn't automatically knit .rmd files
+library(knitr)
 
-env_doc()
+
+kable(env_doc())
 ```
 
 End of test
