@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_gitInfo.R
 \name{get_gitInfo}
 \alias{get_gitInfo}
-\title{get_gitInfo}
+\title{Get git repository information for a script}
 \usage{
 get_gitInfo(scriptPath = "")
 }
@@ -10,7 +10,12 @@ get_gitInfo(scriptPath = "")
 \item{script}{Path to script (optional, defaults to get_scriptPath())}
 }
 \description{
-Get git information from repository
+\code{get_gitinfo} locates the git repository for the calling script
+(if any) and retrieves relevant informaiton such as last commit, status
+(e.g. modified since last commit) and tag (if any).
+}
+\details{
+Requires that \code{\link{git2r}} be installed.
 }
 \examples{
 git_info <- get_gitinfo()

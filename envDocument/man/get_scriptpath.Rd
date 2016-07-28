@@ -2,15 +2,12 @@
 % Please edit documentation in R/get_scriptpath.R
 \name{get_scriptpath}
 \alias{get_scriptpath}
-\title{get_scriptpath}
+\title{Get the path of the calling script}
 \usage{
 get_scriptpath()
 }
 \description{
-Get the path of the calling script
-}
-\details{
-Returns the full path of the script that called this function (if any)
+\code{get_scriptpath} returns the full path of the script that called this function (if any)
 or NULL if path is not available
 }
 \examples{

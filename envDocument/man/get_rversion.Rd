@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_rversion.R
 \name{get_rversion}
 \alias{get_rversion}
-\title{get_rversion}
+\title{Get  information on R version}
 \usage{
 get_rversion()
 }
 \description{
-Get selected info on R version
+Get  information on R version
 }
 \examples{
 Rversion <- get_rversion()

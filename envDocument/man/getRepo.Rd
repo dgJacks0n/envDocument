@@ -2,7 +2,7 @@
 % Please edit documentation in R/getRepo.R
 \name{getRepo}
 \alias{getRepo}
-\title{getRepo}
+\title{Get git repository for a file}
 \usage{
 getRepo(testPath)
 }
@@ -10,6 +10,9 @@ getRepo(testPath)
 \item{testPath}{Path to a file to find/check repo}
 }
 \description{
-Get git repository from path; makes sure path is tracked in repo.
+\code{getRepo} looks the up the repository for a file and 
+makes sure path is tracked in repo.  Repositories are searched
+from the file directory up using 
+\code{\link{git2r::discover_repository}}
 }
 

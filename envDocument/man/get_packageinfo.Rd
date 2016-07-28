@@ -2,12 +2,13 @@
 % Please edit documentation in R/get_packageinfo.R
 \name{get_packageinfo}
 \alias{get_packageinfo}
-\title{get_packageinfo}
+\title{Get information on attached packages}
 \usage{
 get_packageinfo()
 }
 \description{
-Get information on attached packages, return as a data frame
+\code{get_packageinfo} returns information on attached packages
+including name, version and source.
 }
 \examples{
 packages <- get_packageinfo()

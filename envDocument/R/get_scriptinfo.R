@@ -1,8 +1,9 @@
-#' get_scriptinfo
-#' 
 #' Get information about the  calling script 
 #' 
-#' Results include file name and path, last modification time.  
+#' \code{get_scriptinfo} retrieves the  file path and  modification time
+#' for the calling script.  
+#' 
+#' Note:
 #' Currently this works if the script was called via source(),
 #' knitr::spin() or Rstudio's _compile notebook_ (ctrl-shift-K).
 #' It does not work if the script was called via 'R -f' or 'Rscript'.
@@ -12,6 +13,7 @@
 #' @examples 
 #' scriptinfo <- get_scriptinfo()
 #' @export
+#' 
 get_scriptinfo <- function() {
   mtime <- NULL
   path <- get_scriptpath()

@@ -1,6 +1,4 @@
-#' get_rversion
-#' 
-#' Get selected info on R version
+#' Get  information on R version
 #' 
 #' @examples
 #' Rversion <- get_rversion()

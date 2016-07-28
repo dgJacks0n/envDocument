@@ -2,18 +2,16 @@
 % Please edit documentation in R/get_sysinfo.R
 \name{get_sysinfo}
 \alias{get_sysinfo}
-\title{Get system information
-  
-Get OS, hostname, userid and working directory as a data frame}
+\title{Get system information.}
 \usage{
 get_sysinfo()
 }
 \description{
-Get system information
-  
-Get OS, hostname, userid and working directory as a data frame
+\code{get_sysinfo} returns the OS, hostname, userid and working directory
+ for the current analysis as a data frame
 }
 \examples{
 get_sysinfo()
+
 }
 

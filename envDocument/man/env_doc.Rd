@@ -2,7 +2,7 @@
 % Please edit documentation in R/env_doc.R
 \name{env_doc}
 \alias{env_doc}
-\title{env_doc}
+\title{Report the working environment in which an analysis was performed.}
 \usage{
 env_doc(output = c("return", "print"), system = TRUE, version = TRUE,
   packages = TRUE, script = TRUE, git = TRUE)
@@ -31,12 +31,10 @@ A data frame with columns for information type, variable name and
   value.
 }
 \description{
-Reports the working environment in which an analysis was performed.
+\code{env_doc} prints or returns a data frame with the following information:  
+- System version (OS, version, user, working directory)
 }
 \details{
-Prints or returns a data frame with the following information:  
-- System version (OS, version, user, working directory)
-
 - R version
 
 - Package names and versions

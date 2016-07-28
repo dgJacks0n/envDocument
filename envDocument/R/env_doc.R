@@ -1,8 +1,6 @@
-#' env_doc
+#' Report the working environment in which an analysis was performed.
 #' 
-#' Reports the working environment in which an analysis was performed.
-#' 
-#' Prints or returns a data frame with the following information:  
+#' \code{env_doc} prints or returns a data frame with the following information:  
 #' - System version (OS, version, user, working directory)  
 #' 
 #' - R version  

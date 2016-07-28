@@ -2,15 +2,16 @@
 % Please edit documentation in R/get_scriptinfo.R
 \name{get_scriptinfo}
 \alias{get_scriptinfo}
-\title{get_scriptinfo}
+\title{Get information about the  calling script}
 \usage{
 get_scriptinfo()
 }
 \description{
-Get information about the  calling script
+\code{get_scriptinfo} retrieves the  file path and  modification time
+for the calling script.
 }
 \details{
-Results include file name and path, last modification time.  
+Note:
 Currently this works if the script was called via source(),
 knitr::spin() or Rstudio's _compile notebook_ (ctrl-shift-K).
 It does not work if the script was called via 'R -f' or 'Rscript'.

@@ -1,13 +1,12 @@
-#' get_scriptpath
-#' 
 #' Get the path of the calling script
 #' 
-#' Returns the full path of the script that called this function (if any)
+#' \code{get_scriptpath} returns the full path of the script that called this function (if any)
 #' or NULL if path is not available
 #' 
 #' @examples 
 #' mypath <- get_scriptpath()
 #' @export
+#' 
 get_scriptpath <- function() {
   # location of script can depend on how it was invoked:
   # source() and knit() put it in sys.calls()

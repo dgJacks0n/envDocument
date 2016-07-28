@@ -1,6 +1,10 @@
-#' get_gitInfo
+#' Get git repository information for a script
 #' 
-#' Get git information from repository
+#' \code{get_gitinfo} locates the git repository for the calling script
+#' (if any) and retrieves relevant informaiton such as last commit, status
+#' (e.g. modified since last commit) and tag (if any).
+#' 
+#' Requires that \code{\link{git2r}} be installed.
 #' 
 #' @param script Path to script (optional, defaults to get_scriptPath())
 #' @examples

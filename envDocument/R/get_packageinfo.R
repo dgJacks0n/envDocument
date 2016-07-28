@@ -1,6 +1,7 @@
-#' get_packageinfo
+#' Get information on attached packages
 #' 
-#' Get information on attached packages, return as a data frame
+#' \code{get_packageinfo} returns information on attached packages
+#' including name, version and source.
 #' 
 #' @examples
 #' packages <- get_packageinfo()
