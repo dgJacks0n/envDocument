@@ -1,7 +1,5 @@
 ---
 title: "test_envDocument"
-author: "Donald Jackson (donald.jackson@bms.com)"
-date: "February 14, 2016"
 output: html_document
 ---
 
