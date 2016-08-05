@@ -8,8 +8,9 @@
 #' 
 #' @param script Path to script (optional, defaults to get_scriptPath())
 #' @examples
-#' git_info <- get_gitinfo()
+#' git_info <- get_gitInfo()
 #' @export
+#' 
 get_gitInfo <- function(scriptPath = "") {
   
   if(scriptPath == "") {
@@ -21,8 +22,7 @@ get_gitInfo <- function(scriptPath = "") {
     return(NULL)
   }
   
-  # scriptPath <- path.expand(scriptPath)
-  
+ 
   scriptRepo <- getRepo(scriptPath)
   
   if(is.null(scriptRepo)) {
@@ -46,6 +46,9 @@ get_gitInfo <- function(scriptPath = "") {
   if(!is.null(tagString)) {
     results <- rbind(results, data.frame( Name = "Tag", Value = tagString))
   }
+  
+  remotes <- remoteInfo(scriptRepo)
+  results <- rbind(results, remotes)
   
   results$Section = "Git"
   

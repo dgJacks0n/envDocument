@@ -18,6 +18,6 @@ get_gitInfo(scriptPath = "")
 Requires that \code{\link{git2r}} be installed.
 }
 \examples{
-git_info <- get_gitinfo()
+git_info <- get_gitInfo()
 }
 
