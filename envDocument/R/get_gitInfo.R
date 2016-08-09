@@ -13,6 +13,14 @@
 #' 
 get_gitInfo <- function(scriptPath = "") {
   
+  # need to check whether git2r is installed!
+  
+  if (!requireNamespace("git2r", quietly = TRUE)) {
+    stop("Package git2r needed for this function to work. Please install it or call env_doc(git = FALSE).",
+         call. = FALSE)
+  }
+  
+  
   if(scriptPath == "") {
     scriptPath <- get_scriptpath()
   }
@@ -37,8 +45,13 @@ get_gitInfo <- function(scriptPath = "") {
   # has the file been changed since last commit
   changed <- fileStatus(scriptRepo, scriptPath)
   
-  results <- data.frame( Name = c("Commit Hash", "Commit Time", "Status"),
-                         Value = c(substring(lastCommit$sha, 1, 7), lastCommit$when, changed) )
+  results <- data.frame( Name = c("Commit Hash", 
+                                  "Commit Time", 
+                                  "Status"),
+                         Value = c(substring(lastCommit$sha, 1, 7), 
+                                   as.character.Date(lastCommit$when), 
+                                   changed) 
+                         )
   
   # see if commit is tagged
   tagString <- getTag(scriptRepo)
