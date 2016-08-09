@@ -21,7 +21,7 @@
 #'   \code{\link{get_packageinfo}}? Boolean, default TRUE
 #' @param script Include script path and modification time from 
 #'   \code{\link{get_scriptinfo}}? Boolean, default TRUE
-#' @param git Include git repository information? from \code{\link{get_gitInfo}}
+#' @param git Include git repository information from \code{\link{get_gitInfo}}
 #'   (note: requires git2r)?  Boolean, default TRUE
 #'   
 #' @return A data frame with columns for information type, variable name and 

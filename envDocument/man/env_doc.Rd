@@ -23,7 +23,7 @@ Boolean, default TRUE}
 \item{script}{Include script path and modification time from 
 \code{\link{get_scriptinfo}}? Boolean, default TRUE}
 
-\item{git}{Include git repository information? from \code{\link{get_gitInfo}}
+\item{git}{Include git repository information from \code{\link{get_gitInfo}}
 (note: requires git2r)?  Boolean, default TRUE}
 }
 \value{
