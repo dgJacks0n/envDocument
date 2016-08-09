@@ -2,3 +2,4 @@
 .Rhistory
 .RData
 *.html
+/envDocument/envDocument.Rproj
