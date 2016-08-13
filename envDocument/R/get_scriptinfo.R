@@ -21,8 +21,8 @@ get_scriptinfo <- function() {
   if(!is.null(path)) {
     mtime <- file.info(path)$mtime
   }
-  scrinfo <- rbind(data.frame(Section = "Script", Name = "Path", Value = path),
-                   data.frame(Section = "Script", Name = "Modified",
+  scrinfo <- rbind(data.frame(Name = "Path", Value = path),
+                   data.frame(Name = "Modified",
                               Value = as.character(mtime))
   )
   return(scrinfo)

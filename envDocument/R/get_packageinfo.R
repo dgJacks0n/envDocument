@@ -22,8 +22,7 @@ get_packageinfo <- function() {
 # helper for get_packageinfo.  Extracts selected info on individual packages.  
 
 get_thispackageinfo <- function(thisPackage){
-  thisinfo <- data.frame( Section = "Packages",
-                          Name = ifelse(is.null(thisPackage$Package), "NA",
+  thisinfo <- data.frame( Name = ifelse(is.null(thisPackage$Package), "NA",
                                         thisPackage$Package),
                           Value = paste( ifelse(is.null(thisPackage$Version), "NA",thisPackage$Version),
                                          ifelse(is.null(thisPackage$Repository), "NA", thisPackage$Repository),

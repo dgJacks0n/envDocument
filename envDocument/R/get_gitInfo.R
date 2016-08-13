@@ -63,7 +63,5 @@ get_gitInfo <- function(scriptPath = "") {
   remotes <- remoteInfo(scriptRepo)
   results <- rbind(results, remotes)
   
-  results$Section = "Git"
-  
   return(results)
 }

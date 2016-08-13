@@ -10,11 +10,10 @@
 #' @export
 #' 
 get_sysinfo <- function() {
-  sysinfo <- data.frame( Section = "System",
-                         Name = names(Sys.info()), 
+  sysinfo <- data.frame( Name = names(Sys.info()), 
                          Value = unname(Sys.info()))
   
-  cwd <- data.frame( Section = "System", Name = "Directory", Value = getwd() )
+  cwd <- data.frame( Name = "Directory", Value = getwd() )
   
   sysinfo <- rbind(sysinfo, cwd)  
   

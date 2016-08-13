@@ -12,7 +12,8 @@
 #' - Git hash, status and tag (if any; requires package git2r)  
 #'
 #' @param output How should output be handled? return: return as a 
-#'   data frame (default); print: print to stdout
+#'   data frame (default); print: print to stdout; table: pretty-print
+#'   using knitr::kable (requires package knitr)
 #' @param system Include OS info from \code{\link{get_sysinfo}}? Boolean, 
 #'   default TRUE
 #' @param version Include R version from \code{\link{get_rversion}}?  
@@ -24,15 +25,15 @@
 #' @param git Include git repository information from \code{\link{get_gitInfo}}
 #'   (note: requires git2r)?  Boolean, default TRUE
 #'   
-#' @return A data frame with columns for information type, variable name and 
-#'   value.
+#' @return If outpt = return (default) :A data frame with columns for information 
+#'   type, variable name and value.  NULL for output = print or table
 #'  
 #' @examples
 #'  env_doc("print") # print information to stdout
 #'  info <- env_doc() # return information as a consolidated data frame
 #' @export
 #' 
-env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE, 
+env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
                       packages=TRUE, script=TRUE, git = TRUE ) {
   
   envinfo <- list()
@@ -54,26 +55,19 @@ env_doc <- function ( output=c("return", "print"), system=TRUE, version=TRUE,
   }
   
   if(git) {
-    # is git2r installed?
-    if(!requireNamespace("git2r", quietly = TRUE)) {
-      stop("Function get_gitinfo requires package git2r.  Either install it or use env_doc(git = FALSE)")
-    }
-    
     envinfo$Git <- get_gitInfo()
   }
   
-  # flatten list to data frame
-  einfo_df <- NULL
-  for (envitem  in names(envinfo)) {
-    if(!is.null(einfo_df)) {
-      einfo_df <- rbind(einfo_df, envinfo[[envitem]])
-    }
-    else {
-      einfo_df <- envinfo[[envitem]]
-    }
+  # once info is collected either print it or return it
+  if( match.arg(output) == "table") {
+    prettyPrintInfo(envinfo)
+    return(NULL)
   }
   
-  # once info is collected either print it or return it
+  # flatten list to data frame
+  einfo_df <- collapseInfo(envinfo)
+  
+  
   if( match.arg(output) == "print") { 
     print(einfo_df)
     return(NULL)
