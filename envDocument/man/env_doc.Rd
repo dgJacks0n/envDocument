@@ -4,12 +4,13 @@
 \alias{env_doc}
 \title{Report the working environment in which an analysis was performed.}
 \usage{
-env_doc(output = c("return", "print"), system = TRUE, version = TRUE,
-  packages = TRUE, script = TRUE, git = TRUE)
+env_doc(output = c("return", "print", "table"), system = TRUE,
+  version = TRUE, packages = TRUE, script = TRUE, git = TRUE)
 }
 \arguments{
 \item{output}{How should output be handled? return: return as a 
-data frame (default); print: print to stdout}
+data frame (default); print: print to stdout; table: pretty-print
+using knitr::kable (requires package knitr)}
 
 \item{system}{Include OS info from \code{\link{get_sysinfo}}? Boolean, 
 default TRUE}
@@ -27,8 +28,8 @@ Boolean, default TRUE}
 (note: requires git2r)?  Boolean, default TRUE}
 }
 \value{
-A data frame with columns for information type, variable name and 
-  value.
+If outpt = return (default) :A data frame with columns for information 
+  type, variable name and value.  NULL for output = print or table
 }
 \description{
 \code{env_doc} prints or returns a data frame with the following information:  
