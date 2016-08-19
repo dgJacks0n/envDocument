@@ -11,15 +11,14 @@ library(envDocument)
 # about the environment
 info <- env_doc()
 
-# Calling with "print" will print the data frame
+# Call with output = "print" will print the data frame
 env_doc("print")
 
-# This df can be pretty-printed as a table in a knitr report
-# Set the knitr chunk option results to "asis" or the table will be 
-# prefixed with comments
-knitr::opts_chunk$set(results="asis")
+# Call with output = "table" to pretty-print each section with knitr::kable
+# set results to 'asis' to avoid prefixing output
 
-knitr::kable(info)
+#+ env_table, results = "asis"
+env_doc("table")
 
 # change to trigger git status
 message("Done")
