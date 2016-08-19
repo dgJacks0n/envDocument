@@ -11,13 +11,13 @@ prettyPrintInfo <- function(info_list = list()) {
   }
   
   # cache results setting, change to asis so kable results are formatted
-  chunk_results <- knitr::opts_chunk$get(results)
+  chunk_results <- knitr::opts_current$get("results")
   knitr::opts_chunk$set(results = "asis")
   
   discard <- sapply(names(info_list), prettyPrintSection, info_list)
   
   # restore existing chunk results
-  knitr::opts_chunk$get(results = chunk_results)
+  knitr::opts_chunk$set(results = chunk_results)
   
 }
 
