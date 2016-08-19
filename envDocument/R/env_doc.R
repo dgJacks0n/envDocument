@@ -58,15 +58,14 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
     envinfo$Git <- get_gitInfo()
   }
   
-  # once info is collected either print it or return it
+  # once info is collected either format, print it or return it
   if( match.arg(output) == "table") {
     prettyPrintInfo(envinfo)
     return(NULL)
   }
-  
-  # flatten list to data frame
+
+  # flatten list to data frame for unformatted print or return
   einfo_df <- collapseInfo(envinfo)
-  
   
   if( match.arg(output) == "print") { 
     print(einfo_df)
