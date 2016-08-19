@@ -14,4 +14,12 @@ kable(env_doc()) # with git2r installed
 # kable(env_doc(git = FALSE)) # without git2r
 ```
 
+New option in v2.2: option "table" pretty-prints each section separately.
+Requires `knitr`.  Specify `results = "asis"` in knitr chunk options to make sure
+table is formatted in markdown (no leading ##).
+
+```{r table, results = "asis"}
+env_doc("table")
+```
+
 End of test
