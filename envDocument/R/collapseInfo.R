@@ -3,7 +3,7 @@
 collapseInfo <- function(info_list = list()) {
   tag_list <- lapply(names(info_list), tagSection, info_list)
   single_df <- do.call("rbind", tag_list)
-  return(tag_)
+  return(single_df)
 }
 
 
