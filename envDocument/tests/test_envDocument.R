@@ -18,7 +18,7 @@ env_doc("print")
 # set results to 'asis' to avoid prefixing output
 
 #+ env_table, results = "asis"
-env_doc("table")
+# env_doc("table")
 
 # change to trigger git status
 message("Done")
