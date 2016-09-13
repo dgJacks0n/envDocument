@@ -1,0 +1,45 @@
+---
+title: "Using envDocument"
+author: "Donald Jackson (donald.jackson@bms.com)"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `envDocument` package provides a function `env_doc()` which collects information about the environment in which an analysis is run.  Currently, this includes:
+
++ R version
++ Attached packages with version and repository
++ General system information including OS and user
++ Script information including working diretory. script path and modification time
++ Git commit information for script including tracking status, commit status, and remote
+
+The primary purpose is to capture information for inclusion in an analysis report.  As such, the call to env_doc() should be made after all analyses are run.
+
+
+
+Some functions, especialy `get_scriptPath()` and `getRepo()`, may be useful in ohter settings.
+
+# Examples
+
+```{r}
+# library(envDocument) # build & reload doesn't automatically knit .rmd files
+library(knitr)
+
+
+kable(env_doc()) # with git2r installed
+# kable(env_doc(git = FALSE)) # without git2r
+```
+
+New option in v2.2: option "table" pretty-prints each section separately.
+Requires `knitr`.  Specify `results = "asis"` in knitr chunk options to make sure
+table is formatted in markdown (no leading ##).
+
+```{r table, results = "asis"}
+# env_doc("table")
+```
+
+End of test
