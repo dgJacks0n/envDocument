@@ -1,11 +1,13 @@
 Package: envDocument
 Type: Package
 Title: Document the R working environment
-Version: 2.2.02
+Version: 2.2.03
 Date: 2016-09-13
 Author: Donald Jackson <donald.jackson@bms.com>
 Maintainer: Donald Jackson <donald.jackson@bms.com>
 Description: Prints out information about the R working environment (system, R version,included packages and versions) from a single function "env_doc()"
 License: Internal use
-Suggests: git2r(>= 0.15.0), knitr(>= 1.13)
+Suggests: git2r(>= 0.15.0), knitr(>= 1.13),
+    rmarkdown
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
