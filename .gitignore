@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+*.html
+/envDocument/envDocument.Rproj
+/envDocument/man/remoteInfo.Rd
+/envDocument/man/collapseInfo.Rd
+/envDocument/man/prettyPrintInfo.Rd
