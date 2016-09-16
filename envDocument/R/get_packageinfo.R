@@ -7,13 +7,18 @@
 #' packages <- get_packageinfo()
 #' @export
 get_packageinfo <- function() {
-  packages <- sessionInfo()["otherPkgs"]$otherPkgs
-  pkginfo <- data.frame()
+  packages <- sessionInfo()[c("otherPkgs", "loadedOnly")]
   
-  for (i in 1:length(packages)) {
-    pkginfo <- rbind(pkginfo, get_thispackageinfo(packages[[i]]))
-  }
-  return(pkginfo)
+  # collapse top level list
+  packages <- unlist(packages, recursive = FALSE)
+
+  # extract subset of information
+  pkginfo <- lapply(packages, get_thispackageinfo)
+  
+  pkginfo_df <- do.call("rbind", pkginfo)
+  
+  rownames(pkginfo_df) <- NULL
+  return(pkginfo_df)
 }
 
 
