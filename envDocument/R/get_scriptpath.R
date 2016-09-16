@@ -3,11 +3,12 @@
 #' \code{get_scriptpath} returns the full path of the script that called this function (if any)
 #' or NULL if path is not available
 #' 
-#' @param absolute (logical): Return full path (absolute = TRUE, default) or path relative
+#' @param absolute Return absolute path (absolute = TRUE, default) or path relative
 #' to working directory
 #' 
 #' @examples 
 #' mypath <- get_scriptpath()
+#' 
 #' @export
 #' 
 get_scriptpath <- function(absolute = TRUE) {

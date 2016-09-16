@@ -4,7 +4,11 @@
 \alias{get_scriptpath}
 \title{Get the path of the calling script}
 \usage{
-get_scriptpath()
+get_scriptpath(absolute = TRUE)
+}
+\arguments{
+\item{absolute}{Return absolute path (absolute = TRUE, default) or path relative
+to working directory}
 }
 \description{
 \code{get_scriptpath} returns the full path of the script that called this function (if any)
@@ -12,5 +16,6 @@ or NULL if path is not available
 }
 \examples{
 mypath <- get_scriptpath()
+
 }
 
