@@ -4,7 +4,7 @@ author: "Donald Jackson (donald.jackson@bms.com)"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Using envDocument}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ The `envDocument` package provides a function `env_doc()` which collects informa
 + Attached packages with version and repository
 + General system information including OS and user
 + Script information including working diretory. script path and modification time
-+ Git commit information for script including tracking status, commit status, and remote
++ Git commit information for script including tracking status, commit status, and remote (if git2r is available)
 
 The primary purpose is to capture information for inclusion in an analysis report.  As such, the call to env_doc() should be made after all analyses are run.
 
