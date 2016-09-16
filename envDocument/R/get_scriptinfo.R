@@ -14,11 +14,12 @@
 #' scriptinfo <- get_scriptinfo()
 #' @export
 #' 
+
 get_scriptinfo <- function() {
-  mtime <- NULL
+  mtime <- NA
   path <- get_scriptpath()
   
-  if(!is.null(path)) {
+  if(!is.na(path)) {
     mtime <- file.info(path)$mtime
   }
   scrinfo <- rbind(data.frame(Name = "Path", Value = path),
