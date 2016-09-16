@@ -12,6 +12,6 @@ Description: Prints out information about the R working environment
     as wll as attached packages.  
 License: Internal use
 Suggests: git2r(>= 0.15.0), knitr(>= 1.13),
-    rmarkdown
+    rmarkdown (>= 1.0)
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
