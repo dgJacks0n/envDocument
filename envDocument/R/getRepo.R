@@ -7,6 +7,8 @@
 #' 
 #'
 #' @param testPath Path to a file to find/check repo
+#' 
+#' @export
 #'
 getRepo <- function(testPath) {
   # get location of repo that controls testPath
@@ -15,7 +17,7 @@ getRepo <- function(testPath) {
   
   if(is.null(repoPath)) {
     warning("Could not find repo directory for ", testPath)
-    return(NULL)
+    return(NA)
   }
   
   repo <- git2r::repository(repoPath)
@@ -30,7 +32,7 @@ getRepo <- function(testPath) {
     
     if(normalizePath(testPath) %in% normalizePath(paste(repoRoot, unlist(untracked), sep = "/"))) {
       warning("File ", testPath, " is not tracked in repostitory ", repoPath)
-      return(NULL)
+      return(NA)
     }
   }
   
