@@ -26,8 +26,9 @@ get_scriptpath <- function(absolute = TRUE) {
     path <- args
   }
   
-  if ( !(grepl("..+\\.[R|Rmd|Rnw]$", path, perl=TRUE, ignore.case = TRUE)) )  {
-    warning("Obtained value for path does not end with .R, .Rmd or .Rnw: ", path)
+  if ( !(grepl(".+[R|Rmd|Rnw]$", path, perl=TRUE, ignore.case = TRUE)) )  {
+    warning("Obtained value for path <", path, "> does not end with .R, .Rmd or .Rnw: ", path)
+
     return(NA)
   }
   
