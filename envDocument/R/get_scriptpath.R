@@ -14,6 +14,7 @@
 get_scriptpath <- function(absolute = TRUE) {
   # location of script can depend on how it was invoked:
   # source() and knit() put it in sys.calls()
+  
   path <- NULL
   
   if(!is.null(sys.calls())) {
@@ -33,14 +34,12 @@ get_scriptpath <- function(absolute = TRUE) {
   }
   
   # expand ~ if any
-  path <- normalizePath(path)
+  path <- normalizePath(path, winslash = "/")
   
   # if absolute path is requested then return full path
   # otherwise return relative to working directory
   if(!absolute) {
-    wdpath <- normalizePath(getwd())
-    
-    path <- sub(normalizePath(getwd()), ".", path, fixed = TRUE)
+    path <- sub(normalizePath(getwd(), winslash = "/"), ".", path, fixed = TRUE)
   }
   
   return(path)
