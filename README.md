@@ -6,7 +6,12 @@ R version and script (working directory, script path and modification time) and 
 and/or formatting (for example with knitr::kable())
 
 # Changes
-Update in v2.2 adds information on the git commit, tag and status for the calling script.  
+Update in v2.2 adds information on the git commit, tag and status for the calling script. 
+
+Version V_2.2.02 fixes an error that caused script paths to be truncated in reports generated
+on windows systems and includes documentation clean-up in preparation for a CRAN release.
+
+V_2.2.02 passes all CRAN checks except for the non-standard license.
 
 # Installation
 Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
