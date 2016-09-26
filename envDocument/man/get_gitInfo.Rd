@@ -4,10 +4,10 @@
 \alias{get_gitInfo}
 \title{Get git repository information for a script}
 \usage{
-get_gitInfo(scriptPath = "")
+get_gitInfo(scriptpath = "")
 }
 \arguments{
-\item{script}{Path to script (optional, defaults to get_scriptPath())}
+\item{scriptpath}{Path to script (optional, defaults to get_scriptPath())}
 }
 \description{
 \code{get_gitinfo} locates the git repository for the calling script
