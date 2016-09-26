@@ -1,4 +1,5 @@
 #' Collapse list of enviornment information into a single data frme
+#' @param info_list List with environment information
 #' 
 collapseInfo <- function(info_list = list()) {
   tag_list <- lapply(names(info_list), tagSection, info_list)
