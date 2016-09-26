@@ -5,12 +5,19 @@ output: html_document
 
 Rmarkdown file to test envDocument::env_doc()
 
-```{r}
+```{r setup}
 library(envDocument) # build & reload doesn't automatically knit .rmd files
 library(knitr)
 
+```
+
+Calling `env_doc` without an output will return a single data frame that can be printed using `knitr::kable` or other output formatting utilities.  
+
+```{r get_df}
+info <- env_doc()
 
 kable(env_doc()) # with git2r installed
+
 # kable(env_doc(git = FALSE)) # without git2r
 ```
 
@@ -20,6 +27,7 @@ table is formatted in markdown (no leading ##).
 
 ```{r table, results = "asis"}
 env_doc("table")
+
 ```
 
 End of test
