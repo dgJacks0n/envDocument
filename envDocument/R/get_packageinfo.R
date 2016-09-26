@@ -7,7 +7,7 @@
 #' packages <- get_packageinfo()
 #' @export
 get_packageinfo <- function() {
-  packages <- sessionInfo()[c("otherPkgs", "loadedOnly")]
+  packages <- utils::sessionInfo()[c("otherPkgs", "loadedOnly")]
   
   # collapse top level list
   packages <- unlist(packages, recursive = FALSE)
