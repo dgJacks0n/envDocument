@@ -61,7 +61,6 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   # once info is collected either format, print it or return it
   if( match.arg(output) == "table") {
     prettyPrintInfo(envinfo)
-    return(NULL)
   }
 
   # flatten list to data frame for unformatted print or return
@@ -69,8 +68,9 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   
   if( match.arg(output) == "print") { 
     print(einfo_df)
-    return(NULL)
   } 
 
-  return(einfo_df)
+  if( match.arg(output) == "return") {
+    return(einfo_df)
+  }
 }
