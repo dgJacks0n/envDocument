@@ -15,9 +15,10 @@ get_gitInfo(scriptpath = "")
 (e.g. modified since last commit) and tag (if any).
 }
 \details{
-Requires that \code{\link{git2r}} be installed.
+Requires that \code{git2r} be installed.
 }
 \examples{
 git_info <- get_gitInfo()
+
 }
 

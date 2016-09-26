@@ -4,11 +4,13 @@
 #' (if any) and retrieves relevant informaiton such as last commit, status
 #' (e.g. modified since last commit) and tag (if any).
 #' 
-#' Requires that \code{\link{git2r}} be installed.
+#' Requires that \code{git2r} be installed.
 #' 
 #' @param scriptpath Path to script (optional, defaults to get_scriptPath())
+#' 
 #' @examples
 #' git_info <- get_gitInfo()
+#' 
 #' @export
 #' 
 get_gitInfo <- function(scriptpath = "") {
