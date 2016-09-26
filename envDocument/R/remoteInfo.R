@@ -1,5 +1,7 @@
 #' Look up remotes for repository
 #' 
+#' @param repo A git2r repository object
+#' 
 remoteInfo <- function(repo) {
   if(length(git2r::remotes(repo)) == 0) { return(NULL)}
   
