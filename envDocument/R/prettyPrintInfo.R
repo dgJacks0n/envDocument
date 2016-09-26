@@ -3,6 +3,7 @@
 #' Uses \code{knitr::kable} to pretty-print separate tables for each
 #' 'section' (list element) in the enviromnent information.
 #' 
+#' @param info_list R list with environment information
 #' 
 prettyPrintInfo <- function(info_list = list()) {
   # make sure knitr is available
