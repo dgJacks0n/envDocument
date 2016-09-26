@@ -3,6 +3,7 @@
 #' Uses \code{knitr::kable} to pretty-print separate tables for each
 #' 'section' (list element) in the enviromnent information.
 #' 
+#' 
 prettyPrintInfo <- function(info_list = list()) {
   # make sure knitr is available
   if (!requireNamespace("knitr", quietly = TRUE)) {
@@ -10,18 +11,12 @@ prettyPrintInfo <- function(info_list = list()) {
          call. = FALSE)
   }
   
-  # # cache results setting, change to asis so kable results are formatted
-  # chunk_results <- knitr::opts_current$get("results")
-  # knitr::opts_chunk$set(results = "asis")
-  
+  # need to catch output from sapply so it doesn't print.
   discard <- sapply(names(info_list), prettyPrintSection, info_list)
-  
-  # restore existing chunk results
-  # knitr::opts_chunk$set(results = chunk_results)
   
 }
 
-
+# internal function that formats individual sections
 prettyPrintSection <- function(section_name, info_list) {
   print( knitr::kable(info_list[[section_name]], 
                       caption = paste(section_name, "Information", sep = " ")))
