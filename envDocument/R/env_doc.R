@@ -23,7 +23,7 @@
 #' @param script Include script path and modification time from 
 #'   \code{\link{get_scriptinfo}}? Boolean, default TRUE
 #' @param git Include git repository information from \code{\link{get_gitInfo}}
-#'   (note: requires git2r)?  Boolean, default TRUE
+#'   (note: requires \code{git2r})?  Boolean, default TRUE
 #'   
 #' @return If outpt = return (default) :A data frame with columns for information 
 #'   type, variable name and value.  NULL for output = print or table

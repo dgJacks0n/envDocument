@@ -13,6 +13,6 @@ getRepo(testPath)
 \code{getRepo} looks the up the repository for a file and 
 makes sure path is tracked in repo.  Repositories are searched
 from the file directory up using 
-\code{git2r::discover_repository}
+\code{\link[git2r]{discover_repository}}
 }
 

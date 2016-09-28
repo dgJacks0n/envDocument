@@ -20,9 +20,10 @@ Returns a data frame with information on:
  
  - Path and modification time of the calling script   
  
-  - Git commit and tag info (optional, requires \code{git2r})
+  - Git commit and tag info (optional, requires 
+      \code{git2r})
 
 Results are collected in a standardized data frame that can be queried or
-pretty-printed using \code{knitr::kable} or similar methods.
+pretty-printed using \code{\link[knitr]{kable}} or similar methods.
 }
 
