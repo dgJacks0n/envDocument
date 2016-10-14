@@ -11,15 +11,15 @@ Update in v2.2 adds information on the git commit, tag and status for the callin
 Version V_2.2.02 fixes an error that caused script paths to be truncated in reports generated
 on windows systems and includes documentation clean-up in preparation for a CRAN release.
 
-V_2.2.02 passes all CRAN checks except for the non-standard license.
+V_2.2.02 passes all CRAN checks. 
 
 # Installation
 Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
 
 ```
-devtools::install_git("http://biogit.pri.bms.com/jacksod/envDocument", subdir="envDocument") 
+devtools::install_git("https://github.com/dgJacks0n/envDocument", subdir="envDocument") 
 ```
 
 *Note: due to a bug in git2r installation from a specified tag does not work*  
 
-*Thanks to John Thompson for providing this devtools command!*
+
