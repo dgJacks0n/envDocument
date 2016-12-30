@@ -1,6 +1,6 @@
 Package: envDocument
 Type: Package
-Title: Document The R Working Environment
+Title: Document the R Working Environment
 Version: 2.2.2
 Date: 2016-12-29
 Author: Donald Jackson <donald.jackson@bms.com>
