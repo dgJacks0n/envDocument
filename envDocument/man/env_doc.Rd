@@ -15,7 +15,7 @@ using knitr::kable (requires package knitr)}
 \item{system}{Include OS info from \code{\link{getSysInfo}}? Boolean, 
 default TRUE}
 
-\item{version}{Include R version from \code{\link{get_rversion}}?
+\item{version}{Include R version from \code{\link{getRversion}}?
 Boolean, default TRUE}
 
 \item{packages}{Include attached packages with repository and version from 

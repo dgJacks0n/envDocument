@@ -1,9 +1,9 @@
 #' Get  information on R version
 #' 
 #' @examples
-#' Rversion <- get_rversion()
+#' Rversion <- getRversion()
 #' @export
-get_rversion <- function() {
+getRversion <- function() {
   rinfo <- data.frame( Name = "Version", 
                        Value = R.version.string
   )

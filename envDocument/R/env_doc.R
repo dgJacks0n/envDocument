@@ -16,7 +16,7 @@
 #'   using knitr::kable (requires package knitr)
 #' @param system Include OS info from \code{\link{getSysInfo}}? Boolean, 
 #'   default TRUE
-#' @param version Include R version from \code{\link{get_rversion}}?  
+#' @param version Include R version from \code{\link{getRversion}}?  
 #'   Boolean, default TRUE
 #' @param packages Include attached packages with repository and version from 
 #'   \code{\link{get_packageinfo}}? Boolean, default TRUE
@@ -43,7 +43,7 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   }
   
   if(version) {
-    envinfo$R <- get_rversion()
+    envinfo$R <- getRversion()
   }
   
   if(packages) {
