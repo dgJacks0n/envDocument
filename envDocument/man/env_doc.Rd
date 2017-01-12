@@ -12,7 +12,7 @@ env_doc(output = c("return", "print", "table"), system = TRUE,
 data frame (default); print: print to stdout; table: pretty-print
 using knitr::kable (requires package knitr)}
 
-\item{system}{Include OS info from \code{\link{get_sysinfo}}? Boolean, 
+\item{system}{Include OS info from \code{\link{getSysInfo}}? Boolean, 
 default TRUE}
 
 \item{version}{Include R version from \code{\link{get_rversion}}?

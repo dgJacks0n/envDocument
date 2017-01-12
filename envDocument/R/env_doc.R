@@ -14,7 +14,7 @@
 #' @param output How should output be handled? return: return as a 
 #'   data frame (default); print: print to stdout; table: pretty-print
 #'   using knitr::kable (requires package knitr)
-#' @param system Include OS info from \code{\link{get_sysinfo}}? Boolean, 
+#' @param system Include OS info from \code{\link{getSysInfo}}? Boolean, 
 #'   default TRUE
 #' @param version Include R version from \code{\link{get_rversion}}?  
 #'   Boolean, default TRUE
@@ -39,7 +39,7 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   envinfo <- list()
   
   if(system) {
-    envinfo$System  <- get_sysinfo()
+    envinfo$System  <- getSysInfo()
   }
   
   if(version) {

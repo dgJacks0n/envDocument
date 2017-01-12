@@ -1,15 +1,15 @@
 #' Get system information.  
 #' 
 #'   
-#' \code{get_sysinfo} returns the OS, hostname, userid and working directory
+#' \code{getSysInfo} returns the OS, hostname, userid and working directory
 #'  for the current analysis as a data frame
 #' 
 #' @examples 
-#' get_sysinfo()
+#' getSysInfo()
 #' 
 #' @export
 #' 
-get_sysinfo <- function() {
+getSysInfo <- function() {
   sysinfo <- data.frame( Name = names(Sys.info()), 
                          Value = unname(Sys.info()))
   
