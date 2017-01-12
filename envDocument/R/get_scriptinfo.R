@@ -17,7 +17,7 @@
 
 get_scriptinfo <- function() {
   mtime <- NA
-  path <- get_scriptpath()
+  path <- getScriptPath()
   
   if(!is.na(path)) {
     mtime <- file.info(path)$mtime

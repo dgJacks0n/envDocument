@@ -7,11 +7,11 @@
 #' to working directory
 #' 
 #' @examples 
-#' mypath <- get_scriptpath()
+#' mypath <- getScriptPath()
 #' 
 #' @export
 #' 
-get_scriptpath <- function(absolute = TRUE) {
+getScriptPath <- function(absolute = TRUE) {
   # location of script can depend on how it was invoked:
   # source() and knit() put it in sys.calls()
   

@@ -23,7 +23,7 @@ getGitinfo <- function(scriptpath = "") {
   
   
   if(scriptpath == "") {
-    scriptpath <- get_scriptpath()
+    scriptpath <- getScriptPath()
   }
   
   if(is.null(scriptpath) | is.na(scriptpath)) {
