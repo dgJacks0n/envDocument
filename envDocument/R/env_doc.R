@@ -51,7 +51,7 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   }
   
   if(script) {
-    envinfo$Script <- get_scriptinfo()
+    envinfo$Script <- getScriptInfo()
   }
   
   if(git) {

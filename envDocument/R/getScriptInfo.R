@@ -1,6 +1,6 @@
 #' Get information about the  calling script 
 #' 
-#' \code{get_scriptinfo} retrieves the  file path and  modification time
+#' \code{getScriptInfo} retrieves the  file path and  modification time
 #' for the calling script.  
 #' 
 #' Note:
@@ -11,11 +11,11 @@
 #' A later version should capture additional cases.
 #' 
 #' @examples 
-#' scriptinfo <- get_scriptinfo()
+#' script_info <- getScriptInfo()
 #' @export
 #' 
 
-get_scriptinfo <- function() {
+getScriptInfo <- function() {
   mtime <- NA
   path <- getScriptPath()
   
