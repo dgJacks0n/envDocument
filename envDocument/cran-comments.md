@@ -10,4 +10,7 @@ There were no ERRORs or WARNINGs
 NOTEs
 This is the first submission of this package.
 
+## Reverse Dependency Checks
+From devtools::revdep_check()
 
+No ERRORs or WARNINGs found :)
