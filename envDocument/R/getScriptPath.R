@@ -1,6 +1,6 @@
 #' Get the path of the calling script
 #' 
-#' \code{get_scriptpath} returns the full path of the script that called this function (if any)
+#' \code{getScriptPath} returns the full path of the script that called this function (if any)
 #' or NULL if path is not available
 #' 
 #' @param absolute Return absolute path (absolute = TRUE, default) or path relative
