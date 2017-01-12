@@ -1,6 +1,6 @@
 #' Get git repository information for a script
 #' 
-#' \code{get_gitinfo} locates the git repository for the calling script
+#' \code{getGitinfo} locates the git repository for the calling script
 #' (if any) and retrieves relevant informaiton such as last commit, status
 #' (e.g. modified since last commit) and tag (if any).
 #' 
@@ -9,14 +9,13 @@
 #' @param scriptpath Path to script (optional, defaults to get_scriptPath())
 #' 
 #' @examples
-#' git_info <- get_gitInfo()
+#' git_info <- getGitinfo()
 #' 
 #' @export
 #' 
-get_gitInfo <- function(scriptpath = "") {
+getGitinfo <- function(scriptpath = "") {
   
-  # need to check whether git2r is installed!
-  
+  # check whether git2r is installed
   if (!requireNamespace("git2r", quietly = TRUE)) {
     stop("Package git2r needed for this function to work. Please install it or call env_doc(git = FALSE).",
          call. = FALSE)
