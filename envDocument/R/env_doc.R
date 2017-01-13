@@ -19,7 +19,7 @@
 #' @param version Include R version from \code{\link{getRversion}}?  
 #'   Boolean, default TRUE
 #' @param packages Include attached packages with repository and version from 
-#'   \code{\link{get_packageinfo}}? Boolean, default TRUE
+#'   \code{\link{getPackageInfo}}? Boolean, default TRUE
 #' @param script Include script path and modification time from 
 #'   \code{\link{get_scriptinfo}}? Boolean, default TRUE
 #' @param git Include git repository information from \code{\link{get_gitInfo}}
@@ -47,7 +47,7 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   }
   
   if(packages) {
-    envinfo$Packages <- get_packageinfo()
+    envinfo$Packages <- getPackageInfo()
   }
   
   if(script) {

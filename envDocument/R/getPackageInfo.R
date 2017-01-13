@@ -1,12 +1,13 @@
 #' Get information on attached packages
 #' 
-#' \code{get_packageinfo} returns information on attached packages
+#' \code{getPackageInfo} returns information on attached packages
 #' including name, version and source.
 #' 
 #' @examples
-#' packages <- get_packageinfo()
+#' packages <- getPackageInfo()
 #' @export
-get_packageinfo <- function() {
+#' 
+getPackageInfo <- function() {
   packages <- utils::sessionInfo()[c("otherPkgs", "loadedOnly")]
   
   # collapse top level list
