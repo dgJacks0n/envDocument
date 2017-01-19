@@ -19,7 +19,7 @@ default TRUE}
 Boolean, default TRUE}
 
 \item{packages}{Include attached packages with repository and version from 
-\code{\link{get_packageinfo}}? Boolean, default TRUE}
+\code{\link{getPackageInfo}}? Boolean, default TRUE}
 
 \item{script}{Include script path and modification time from 
 \code{\link{get_scriptinfo}}? Boolean, default TRUE}
