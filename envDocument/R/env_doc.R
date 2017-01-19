@@ -55,7 +55,7 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   }
   
   if(git) {
-    envinfo$Git <- getGitinfo()
+    envinfo$Git <- getGitInfo()
   }
   
   # once info is collected either format, print it or return it
