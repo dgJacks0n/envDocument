@@ -15,7 +15,7 @@ getRepo <- function(testPath) {
   repoPath <- git2r::discover_repository(testPath)
   
   
-  if(is.null(repoPath)) {
+  if(is.null(repoPath) | is.na(repoPath)) {
     warning("Could not find repo directory for ", testPath)
     return(NA)
   }
@@ -23,14 +23,14 @@ getRepo <- function(testPath) {
   repo <- git2r::repository(repoPath)
   
   
-  # is file tracked in repo?
+  # is file tracked in repo?  
   untracked <- git2r::status(repo, staged = FALSE, unstaged = FALSE, untracked = TRUE)
-  
-  
+
   if(length(untracked[["untracked"]]) > 0) {
-    repoRoot <- sub("/.git/", "", repoPath,  fixed = TRUE)
-    
-    if(normalizePath(testPath) %in% normalizePath(paste(repoRoot, unlist(untracked), sep = "/"))) {
+    repoRoot <- sub("/\\.git/*", "", repoPath,  fixed = FALSE)
+
+    if(normalizePath(testPath) %in%
+       normalizePath(paste(repoRoot, untracked[["untracked"]],sep = "/"))) {
       warning("File ", testPath, " is not tracked in repostitory ", repoPath)
       return(NA)
     }
