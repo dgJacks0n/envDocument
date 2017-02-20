@@ -21,8 +21,8 @@
 #' @param packages Include attached packages with repository and version from 
 #'   \code{\link{getPackageInfo}}? Boolean, default TRUE
 #' @param script Include script path and modification time from 
-#'   \code{\link{get_scriptinfo}}? Boolean, default TRUE
-#' @param git Include git repository information from \code{\link{get_gitInfo}}
+#'   \code{\link{getScriptInfo}}? Boolean, default TRUE
+#' @param git Include git repository information from \code{\link{getGitInfo}}
 #'   (note: requires \code{git2r})?  Boolean, default TRUE
 #'   
 #' @return If outpt = return (default) :A data frame with columns for information 
