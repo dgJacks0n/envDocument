@@ -26,7 +26,7 @@ getGitInfo <- function(scriptpath = "") {
     scriptpath <- getScriptPath()
   }
   
-  if(is.null(scriptpath) | is.na(scriptpath)) {
+  if(is.na(scriptpath)) {
     warning("Could not determine script path, unable to look up git information")
     return(NULL)
   }
@@ -34,7 +34,7 @@ getGitInfo <- function(scriptpath = "") {
  
   scriptRepo <- getRepo(scriptpath)
   
-  if(is.null(scriptRepo)) {
+  if(is.na(scriptRepo)) {
     # getRepo will throw the warning...
     return(NULL)
   }
