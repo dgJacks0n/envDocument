@@ -17,11 +17,11 @@ The `envDocument` package provides a function `env_doc()` which collects informa
 + Script information including working diretory. script path and modification time
 + Git commit information for script including tracking status, commit status, and remote (if git2r is available)
 
-The primary purpose is to capture information for inclusion in an analysis report.  As such, the call to env_doc() should be made after all analyses are run.
+The primary purpose is to capture information for inclusion in an analysis report.  As such, the call to env_doc() should be made after all libraries are attached.
 
 
 
-Some functions, especialy `get_scriptPath()` and `getRepo()`, may be useful in ohter settings.
+Some functions, especialy `getScriptPath()` (get path to calling script) and `getRepo()` (find git repo for calling script), may be useful in ohter settings.
 
 # Examples
 
