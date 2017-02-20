@@ -5,10 +5,11 @@ fileStatus <- function(repo, testPath) {
   testStatus <- NULL
   
   # need to get top level path for repo
-  repoRoot <- sub("/.git/", "", repo@path,  fixed = TRUE)
+  repoRoot <- sub("/\\.git/*", "", repo@path,  fixed = FALSE)
   
   statusVals <- unlist(git2r::status(repo))
-  hasStatus <-  normalizePath(testPath) == normalizePath(paste(repoRoot, statusVals, sep = "/"))
+  hasStatus <-  normalizePath(testPath) == 
+    normalizePath(paste(repoRoot, statusVals, sep = "/"))
   
   if(any(hasStatus)) {
     testStatus <- paste(names(statusVals[hasStatus]), collapse = ", ")
