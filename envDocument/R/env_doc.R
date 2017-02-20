@@ -43,7 +43,7 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   }
   
   if(version) {
-    envinfo$R <- getRversion()
+    envinfo$R <- get_Rversion()
   }
   
   if(packages) {

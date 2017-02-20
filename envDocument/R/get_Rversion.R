@@ -3,7 +3,7 @@
 #' @examples
 #' Rversion <- getRversion()
 #' @export
-getRversion <- function() {
+get_Rversion <- function() {
   rinfo <- data.frame( Name = "Version", 
                        Value = R.version.string
   )
