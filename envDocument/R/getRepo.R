@@ -10,7 +10,26 @@
 #' 
 #' @export
 #'
-getRepo <- function(testPath) {
+getRepo <- function(testPath = NA) {
+  # if no path provided: test with calling script
+  if(is.na(testPath)) {
+    testPath <- getScriptPath()
+    
+    # did that work?
+    if(is.na(testPath)) {
+      warning("Unable to determine test path: no path provided or available from envDocument::getScriptPath()")
+      return(NA)
+    } else {
+      message("No test path provided, using value from envDocument::getScriptPath()")
+    }
+  }
+  
+  # is testPath valid
+  if(!file.exists(testPath)) {
+    stop("File ", testPath, " does not exist, cannot locate repo")
+  }
+  
+  
   # get location of repo that controls testPath
   repoPath <- git2r::discover_repository(testPath)
   
