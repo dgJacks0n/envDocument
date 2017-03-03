@@ -8,6 +8,11 @@
 #' 
 #' @examples 
 #' mypath <- getScriptPath()
+#' mypath <- get_scriptpath() # for compatibility with older versions
+#' 
+#' @aliases
+#' get_scriptpath()
+#' 
 #' 
 #' @export
 #' 
@@ -43,4 +48,10 @@ getScriptPath <- function(absolute = TRUE) {
   }
   
   return(path)
+}
+
+#' @export
+
+get_scriptpath <- function(...) {
+  getScriptPath(...)
 }
