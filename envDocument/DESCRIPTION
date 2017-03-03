@@ -1,8 +1,8 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.2.2
-Date: 2016-12-29
+Version: 2.3.0.1
+Date: 2017-12-29
 Author: c(
     person("Donald", "Jackson", , "donald.jackson@bms.com", role = c("aut", "cre")),
     person("Bristol-Myers Squibb, role = "cph")
