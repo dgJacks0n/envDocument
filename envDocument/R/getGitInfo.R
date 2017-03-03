@@ -34,7 +34,7 @@ getGitInfo <- function(scriptpath = "") {
  
   scriptRepo <- getRepo(scriptpath)
   
-  if(is.na(scriptRepo)) {
+  if(class(scriptRepo) != "git_repository") {
     # getRepo will throw the warning...
     return(NULL)
   }
