@@ -4,7 +4,7 @@
 \alias{getRepo}
 \title{Locate the git repository where a file is tracked}
 \usage{
-getRepo(testPath)
+getRepo(testPath = NA)
 }
 \arguments{
 \item{testPath}{Path to a file to find/check repo}

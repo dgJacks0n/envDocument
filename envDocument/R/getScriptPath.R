@@ -8,6 +8,11 @@
 #' 
 #' @examples 
 #' mypath <- getScriptPath()
+#' mypath <- get_scriptpath() # for compatibility with older versions
+#' 
+#' @aliases
+#' get_scriptpath()
+#' 
 #' 
 #' @export
 #' 
@@ -18,7 +23,7 @@ getScriptPath <- function(absolute = TRUE) {
   path <- NULL
   
   if(!is.null(sys.calls())) {
-    # get name of script - hope this is consisitent!
+    # get name of script - hope this is consistent!
     path <- as.character(sys.call(1))[2] 
     # make sure we got a file that ends in .R, .Rmd or .Rnw
   } else{
@@ -43,4 +48,10 @@ getScriptPath <- function(absolute = TRUE) {
   }
   
   return(path)
+}
+
+#' @export
+
+get_scriptpath <- function(...) {
+  getScriptPath(...)
 }
