@@ -6,13 +6,10 @@
 #' @param absolute Return absolute path (absolute = TRUE, default) or path relative
 #' to working directory
 #' 
+#' @aliases get_scriptpath
+#' 
 #' @examples 
 #' mypath <- getScriptPath()
-#' mypath <- get_scriptpath() # for compatibility with older versions
-#' 
-#' @aliases
-#' get_scriptpath()
-#' 
 #' 
 #' @export
 #' 
@@ -50,8 +47,5 @@ getScriptPath <- function(absolute = TRUE) {
   return(path)
 }
 
-#' @export
-
-get_scriptpath <- function(...) {
-  getScriptPath(...)
-}
+# alias for backward compatibility
+get_scriptpath <- getScriptPath
