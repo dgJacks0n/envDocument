@@ -48,4 +48,6 @@ getScriptPath <- function(absolute = TRUE) {
 }
 
 # alias for backward compatibility
+
+#' @export
 get_scriptpath <- getScriptPath
