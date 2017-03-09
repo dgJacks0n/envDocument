@@ -2,7 +2,7 @@
 % Please edit documentation in R/getScriptPath.R
 \name{getScriptPath}
 \alias{getScriptPath}
-\alias{get_scriptpath()}
+\alias{get_scriptpath}
 \title{Get the path of the calling script}
 \usage{
 getScriptPath(absolute = TRUE)
@@ -17,7 +17,6 @@ or NULL if path is not available
 }
 \examples{
 mypath <- getScriptPath()
-mypath <- get_scriptpath() # for compatibility with older versions
 
 }
 
