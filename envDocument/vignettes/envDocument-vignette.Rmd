@@ -14,14 +14,14 @@ The `envDocument` package provides a function `env_doc()` which collects informa
 + R version
 + Attached packages with version and repository
 + General system information including OS and user
-+ Script information including working diretory. script path and modification time
++ Script information including working directory. script path and modification time
 + Git commit information for script including tracking status, commit status, and remote (if git2r is available)
 
 The primary purpose is to capture information for inclusion in an analysis report.  As such, the call to env_doc() should be made after all libraries are attached.
 
 
 
-Some functions, especialy `getScriptPath()` (get path to calling script) and `getRepo()` (find git repo for calling script), may be useful in ohter settings.
+Some functions, especialy `getScriptPath()` (get path to calling script) and `getRepo()` (find git repo for calling script), may be useful in other settings.
 
 # Examples
 
@@ -34,9 +34,8 @@ kable(env_doc()) # with git2r installed
 kable(env_doc(git = FALSE)) # without git2r
 ```
 
-New option in v2.2: option "table" pretty-prints each section separately.
-Requires `knitr`.  Specify `results = "asis"` in knitr chunk options to make sure
-table is formatted in markdown (no leading ##).
+The `getScriptPath()` function looks up the name of the script being run.  If called in an interactive context it will return NA.  `get_scriptpath()` is provided as an alias for backwards compatibility.
+
 
 ```{r table, echo = TRUE, eval = FALSE}
 env_doc("table")
