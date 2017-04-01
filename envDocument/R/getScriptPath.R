@@ -14,9 +14,14 @@
 #' @export
 #' 
 getScriptPath <- function(absolute = TRUE) {
+  # not relevant in interactive mode
+  if(interactive()) {
+    warning("Unable to determine script path in interactive mode")
+    return(NA)
+  }
+  
   # location of script can depend on how it was invoked:
   # source() and knit() put it in sys.calls()
-  
   path <- NULL
   
   if(!is.null(sys.calls())) {
