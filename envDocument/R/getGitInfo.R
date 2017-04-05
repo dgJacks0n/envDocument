@@ -6,14 +6,14 @@
 #' 
 #' Requires that \code{git2r} be installed.
 #' 
-#' @param scriptpath Path to script (optional, defaults to get_scriptPath())
+#' @param scriptpath Path to script (optional, defaults to calling script from get_scriptPath())
 #' 
 #' @examples
 #' git_info <- getGitInfo()
 #' 
 #' @export
 #' 
-getGitInfo <- function(scriptpath = "") {
+getGitInfo <- function(scriptpath = NA) {
   
   # check whether git2r is installed
   if (!requireNamespace("git2r", quietly = TRUE)) {
@@ -21,26 +21,24 @@ getGitInfo <- function(scriptpath = "") {
          call. = FALSE)
   }
   
-  
-  if(scriptpath == "") {
-    scriptpath <- getScriptPath()
-  }
-  
+  # look up script 
   if(is.na(scriptpath)) {
-    warning("Could not determine script path, unable to look up git information")
-    return(NULL)
+    scriptpath <- try(getScriptPath(), silent = FALSE)
+    
+    if(class(scriptpath) == "try-error") {
+      warning(scriptpath)
+      return(infoNotFound())
+    }
   }
   
- 
-  scriptRepo <- getRepo(scriptpath)
+  scriptRepo <- try(getRepo(scriptpath), silent = TRUE)
   
-  if(class(scriptRepo) != "git_repository") {
-    # getRepo will throw the warning...
-    return(NULL)
+  if(class(scriptRepo) == "try-error") {
+    warning(scriptRepo)
+    return(infoNotFound())
   }
   
-  
-  # get last commit info
+   # get last commit info
   lastCommit <- methods::as(scriptRepo, "data.frame")[1,]
   
   # has the file been changed since last commit
@@ -66,3 +64,5 @@ getGitInfo <- function(scriptpath = "") {
   
   return(results)
 }
+
+
