@@ -14,16 +14,10 @@
 #' @export
 #' 
 getScriptPath <- function(absolute = TRUE) {
-  # not relevant in interactive mode
-  if(interactive()) {
-    warning("Unable to determine script path in interactive mode")
-    return(NA)
-  }
+  path <- NULL
   
   # location of script can depend on how it was invoked:
   # source() and knit() put it in sys.calls()
-  path <- NULL
-  
   if(!is.null(sys.calls())) {
     # get name of script - hope this is consistent!
     path <- as.character(sys.call(1))[2] 
@@ -34,10 +28,12 @@ getScriptPath <- function(absolute = TRUE) {
     path <- args
   }
   
+  if(is.null(path)) {
+    stop("No path information available.")
+  }
+  
   if ( !(grepl(".+[R|Rmd|Rnw]$", path, perl=TRUE, ignore.case = TRUE)) )  {
-    warning("Obtained value for path <", path, "> does not end with .R, .Rmd or .Rnw: ", path)
-
-    return(NA)
+    stop("Obtained value for path <", path, "> does not end with .R, .Rmd or .Rnw: ", path)
   }
   
   # expand ~ if any
