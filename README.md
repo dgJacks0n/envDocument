@@ -6,12 +6,12 @@ R version and script (working directory, script path and modification time) and 
 and/or formatting (for example with `knitr::kable()`)
 
 # Changes
-Update in v2.2 adds information on the git commit, tag and status for the calling script. 
 
-Version V_2.2.02 fixes an error that caused script paths to be truncated in reports generated
-on windows systems and includes documentation clean-up in preparation for a CRAN release.
++ Version 2.3.0.1 switched to using try() error handling for missing file or repository information
++ Version 2.3.0 corresponds to the initial CRAN submission. Names of lower-level functions were updated.
++ Version 2.2.02 fixes an error that caused script paths to be truncated in reports generated on windows systems and includes documentation clean-up in preparation for a CRAN release. V_2.2.02 passes all CRAN checks. 
++ Version 2.2 adds information on the git commit, tag and status for the calling script. 
 
-V_2.2.02 passes all CRAN checks. 
 
 # Installation
 Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
@@ -20,6 +20,6 @@ Either download the current .tar.gz file from the [packageReleases](packageRelea
 devtools::install_git("https://github.com/dgJacks0n/envDocument", subdir="envDocument") 
 ```
 
-*Note: due to a bug in git2r installation from a specified tag does not work*  
+*Note: due to a known bug in git2r installation from a specified tag does not work*  
 
 
