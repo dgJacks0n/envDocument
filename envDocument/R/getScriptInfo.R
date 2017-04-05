@@ -19,15 +19,14 @@ getScriptInfo <- function() {
   path <- try(getScriptPath(), silent = TRUE)
   
   if (class(path) == "try-error") {
-    scrinfo <- rbind(data.frame(Name = "Path", Value = "Not Available"),
-                     data.frame(Name = "Modified",
-                                Value = "Not Available")
-    )
-  } else {
-    scrinfo <- rbind(data.frame(Name = "Path", Value = path),
-                     data.frame(Name = "Modified",
-                                Value = as.character(file.info(path)$mtime))
-    )
-  }
+    warning(path)
+    return(infoNotFound())
+  } 
+  
+  scrinfo <- rbind(data.frame(Name = "Path", Value = path),
+                   data.frame(Name = "Modified",
+                              Value = as.character(file.info(path)$mtime))
+  )
+  
   return(scrinfo)
 }
