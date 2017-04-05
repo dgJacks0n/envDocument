@@ -17,13 +17,14 @@ getGitInfo <- function(scriptpath = NA) {
   
   # check whether git2r is installed
   if (!requireNamespace("git2r", quietly = TRUE)) {
-    stop("Package git2r needed for this function to work. Please install it or call env_doc(git = FALSE).",
+    warning("Package git2r is needed by getGitInfo. Please install it or call env_doc(git = FALSE).",
          call. = FALSE)
+    return(infoNotFound())
   }
   
   # look up script 
   if(is.na(scriptpath)) {
-    scriptpath <- try(getScriptPath(), silent = FALSE)
+    scriptpath <- try(getScriptPath(), silent = TRUE)
     
     if(class(scriptpath) == "try-error") {
       warning(scriptpath)
