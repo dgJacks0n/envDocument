@@ -9,7 +9,9 @@ and/or formatting (for example with `knitr::kable()`)
 See the changes described in [envDocument/NEWS.md](envDocument/NEWS.md) for a summary of version-to-version changes
 
 # Installation
-Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
+Recommended: install from CRAN.  See https://cran.r-project.org/package=envDocument
+
+Alternatives: Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
 
 ```
 devtools::install_git("https://github.com/dgJacks0n/envDocument", subdir="envDocument") 
