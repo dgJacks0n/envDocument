@@ -6,11 +6,7 @@ R version and script (working directory, script path and modification time) and 
 and/or formatting (for example with `knitr::kable()`)
 
 # Changes
-Version V_2.3.0 is available from CRAN - see https://cran.r-project.org/package=envDocument
-Version V_2.2.02 fixes an error that caused script paths to be truncated in reports generated
-on windows systems and includes documentation clean-up in preparation for a CRAN release.
-
-V_2.2.02 passes all CRAN checks. 
+See the changes described in [envDocument/NEWS.md](envDocument/NEWS.md) for a summary of version-to-version changes
 
 # Installation
 Recommended: install from CRAN.  See https://cran.r-project.org/package=envDocument
@@ -21,6 +17,6 @@ Alternatives: Either download the current .tar.gz file from the [packageReleases
 devtools::install_git("https://github.com/dgJacks0n/envDocument", subdir="envDocument") 
 ```
 
-*Note: due to a bug in git2r installation from a specified tag does not work*  
+*Note: due to a known bug in git2r installation from a specified tag does not work*  
 
 

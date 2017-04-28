@@ -8,8 +8,9 @@ fileStatus <- function(repo, testPath) {
   repoRoot <- sub("/\\.git/*", "", repo@path,  fixed = FALSE)
   
   statusVals <- unlist(git2r::status(repo))
-  hasStatus <-  normalizePath(testPath) == 
-    normalizePath(paste(repoRoot, statusVals, sep = "/"))
+  hasStatus <-  normalizePath(testPath, mustWork = FALSE) == 
+    normalizePath(paste(repoRoot, statusVals, sep = "/"), 
+                  mustWork = FALSE)
   
   if(any(hasStatus)) {
     testStatus <- paste(names(statusVals[hasStatus]), collapse = ", ")
