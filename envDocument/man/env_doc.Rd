@@ -5,7 +5,8 @@
 \title{Report the working environment in which an analysis was performed.}
 \usage{
 env_doc(output = c("return", "print", "table"), system = TRUE,
-  version = TRUE, packages = TRUE, script = TRUE, git = TRUE)
+  version = TRUE, packages = TRUE, script = TRUE, git = TRUE,
+  domino = FALSE)
 }
 \arguments{
 \item{output}{How should output be handled? return: return as a 
@@ -26,6 +27,9 @@ Boolean, default TRUE}
 
 \item{git}{Include git repository information from \code{\link{getGitInfo}}
 (note: requires \code{git2r})?  Boolean, default TRUE}
+
+\item{domino}{Include environment variables from Domino run?
+Boolean, default FALSE}
 }
 \value{
 If outpt = return (default) :A data frame with columns for information 
@@ -48,4 +52,3 @@ If outpt = return (default) :A data frame with columns for information
  env_doc("print") # print information to stdout
  info <- env_doc() # return information as a consolidated data frame
 }
-

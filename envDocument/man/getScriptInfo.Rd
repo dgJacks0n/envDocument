@@ -13,12 +13,9 @@ for the calling script.
 \details{
 Note:
 Currently this works if the script was called via source(),
-knitr::spin() or Rstudio's _compile notebook_ (ctrl-shift-K).
-It does not work if the script was called via 'R -f' or 'Rscript'.
-In those cases NAs are returned for the path and mod. time.
-A later version should capture additional cases.
+knitr::spin(),  Rstudio's _compile notebook_ (ctrl-shift-K), 
+Rscript or R -f.
 }
 \examples{
 script_info <- getScriptInfo()
 }
-

@@ -15,4 +15,3 @@ makes sure path is tracked in repo.  Repositories are searched
 from the file directory up using 
 \code{\link[git2r]{discover_repository}}
 }
-
