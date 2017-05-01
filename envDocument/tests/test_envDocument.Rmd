@@ -26,7 +26,7 @@ Requires `knitr`.  Specify `results = "asis"` in knitr chunk options to make sur
 table is formatted in markdown (no leading ##).
 
 ```{r table, results = "asis"}
-env_doc("table")
+env_doc("table", domino = TRUE)
 
 ```
 
