@@ -10,6 +10,7 @@ getDominoInfo <- function() {
   
   # Return 'not found' values if no info was found
   if(nchar(domino_values["DOMINO_RUN_ID"]) == 0) {
+    warning("Domino environment variables not found")
     return(infoNotFound())
   }
   
@@ -35,7 +36,11 @@ getDominoInfo <- function() {
   # format variable names
   domino_values$Name <- sub("^DOMINO_", "", rownames(domino_values))
   domino_values$Name <- gsub("_", " ", domino_values$Name)
-  domino_values$Name <- stringr::str_to_title(domino_values$Name)
+  
+  # titlecase variable names if stringr is available
+  if(requireNamespace("stringr", quietly = TRUE)) {
+    domino_values$Name <- stringr::str_to_title(domino_values$Name)
+  }
   
   domino_values <- domino_values[c("Name", "Value")]
   rownames(domino_values) <- NULL
