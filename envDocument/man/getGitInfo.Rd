@@ -21,3 +21,4 @@ Requires that \code{git2r} be installed.
 git_info <- getGitInfo()
 
 }
+

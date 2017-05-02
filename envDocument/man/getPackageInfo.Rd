@@ -13,3 +13,4 @@ including name, version and source.
 \examples{
 packages <- getPackageInfo()
 }
+

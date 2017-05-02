@@ -19,3 +19,4 @@ Rscript or R -f.
 \examples{
 script_info <- getScriptInfo()
 }
+

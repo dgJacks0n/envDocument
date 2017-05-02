@@ -19,3 +19,4 @@ or NULL if path is not available
 mypath <- getScriptPath()
 
 }
+
