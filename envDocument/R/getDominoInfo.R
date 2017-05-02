@@ -3,8 +3,9 @@
 #' @export
 
 getDominoInfo <- function() {
-  domino_varnames <- c("DOMINO_PROJECT_NAME", "DOMINO_API_HOST", "DOMINO_RUN_ID", "DOMINO_RUN_NUMBER", 
-                       "DOMINO_WORKING_DIR", "DOMINO_STARTING_USERNAME")
+  domino_varnames <- c("DOMINO_API_HOST", "DOMINO_PROJECT_NAME", "DOMINO_PROJECT_OWNER",
+                       "DOMINO_RUN_ID", "DOMINO_RUN_NUMBER", "DOMINO_STARTING_USERNAME",
+                       "DOMINO_WORKING_DIR")
   
   domino_values <- Sys.getenv(domino_varnames)
   
@@ -21,7 +22,7 @@ getDominoInfo <- function() {
   # build url
   domino_values["DOMINO_RUN_URL"] <- paste(domino_values["DOMINO_SERVER"],
                                            "u",
-                                           domino_values["DOMINO_STARTING_USERNAME"],
+                                           domino_values["DOMINO_PROJECT_OWNER"],
                                            domino_values["DOMINO_PROJECT_NAME"],
                                            "runs",
                                            domino_values["DOMINO_RUN_ID"],
