@@ -24,6 +24,8 @@
 #'   \code{\link{getScriptInfo}}? Boolean, default TRUE
 #' @param git Include git repository information from \code{\link{getGitInfo}}
 #'   (note: requires \code{git2r})?  Boolean, default TRUE
+#' @param domino Include environment variables from Domino run?
+#'   Boolean, default FALSE
 #'   
 #' @return If outpt = return (default) :A data frame with columns for information 
 #'   type, variable name and value.  NULL for output = print or table
@@ -34,7 +36,7 @@
 #' @export
 #' 
 env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
-                      packages=TRUE, script=TRUE, git = TRUE ) {
+                      packages=TRUE, script=TRUE, git = TRUE, domino = FALSE) {
   
   envinfo <- list()
   
@@ -56,6 +58,10 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   
   if(git) {
     envinfo$Git <- getGitInfo()
+  }
+  
+  if(domino) {
+    envinfo$Domino <- getDominoInfo()
   }
   
   # once info is collected either format, print it or return it

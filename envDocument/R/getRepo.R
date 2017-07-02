@@ -29,7 +29,7 @@ getRepo <- function(testPath = NA) {
   repoPath <- git2r::discover_repository(testPath)
   
   
-  if(is.null(repoPath) | is.na(repoPath)) {
+  if(is.null(repoPath) || is.na(repoPath)) {
     stop("Could not find repo directory for ", testPath)
   }
   
