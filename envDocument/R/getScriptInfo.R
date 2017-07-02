@@ -5,10 +5,9 @@
 #' 
 #' Note:
 #' Currently this works if the script was called via source(),
-#' knitr::spin() or Rstudio's _compile notebook_ (ctrl-shift-K).
-#' It does not work if the script was called via 'R -f' or 'Rscript'.
-#' In those cases NAs are returned for the path and mod. time.
-#' A later version should capture additional cases.
+#' knitr::spin(),  Rstudio's _compile notebook_ (ctrl-shift-K), 
+#' Rscript or R -f.  
+#' 
 #' 
 #' @examples 
 #' script_info <- getScriptInfo()
@@ -17,14 +16,17 @@
 
 getScriptInfo <- function() {
   mtime <- NA
-  path <- getScriptPath()
+  path <- try(getScriptPath(), silent = TRUE)
   
-  if(!is.na(path)) {
-    mtime <- file.info(path)$mtime
-  }
+  if (class(path) == "try-error") {
+    warning(path)
+    return(infoNotFound())
+  } 
+  
   scrinfo <- rbind(data.frame(Name = "Path", Value = path),
                    data.frame(Name = "Modified",
-                              Value = as.character(mtime))
+                              Value = as.character(file.info(path)$mtime))
   )
+  
   return(scrinfo)
 }

@@ -13,34 +13,31 @@
 getRepo <- function(testPath = NA) {
   # if no path provided: test with calling script
   if(is.na(testPath)) {
-    testPath <- getScriptPath()
+    testPath <- try(getScriptPath(), silent = TRUE)
     
     # did that work?
-    if(is.na(testPath)) {
-      warning("Unable to determine test path: no path provided or available from envDocument::getScriptPath()")
-      return(NA)
-    } else {
-      message("No test path provided, using value from envDocument::getScriptPath()")
+    if(class(testPath) == "try-error") {
+      stop(testPath)
     }
   }
-  
   # is testPath valid
   if(!file.exists(testPath)) {
     stop("File ", testPath, " does not exist, cannot locate repo")
   }
-  
   
   # get location of repo that controls testPath
   repoPath <- git2r::discover_repository(testPath)
   
   
   if(is.null(repoPath) | is.na(repoPath)) {
-    warning("Could not find repo directory for ", testPath)
-    return(NA)
+    stop("Could not find repo directory for ", testPath)
   }
   
   repo <- git2r::repository(repoPath)
   
+  if(class(repo) != "git_repository") {
+    stop("Unable to locate a git repository for", testPath)
+  }
   
   # is file tracked in repo?  
   untracked <- git2r::status(repo, staged = FALSE, unstaged = FALSE, untracked = TRUE)
@@ -48,13 +45,12 @@ getRepo <- function(testPath = NA) {
   if(length(untracked[["untracked"]]) > 0) {
     repoRoot <- sub("/\\.git/*", "", repoPath,  fixed = FALSE)
 
-    if(normalizePath(testPath) %in%
-       normalizePath(paste(repoRoot, untracked[["untracked"]],sep = "/"))) {
-      warning("File ", testPath, " is not tracked in repostitory ", repoPath)
-      return(NA)
+    if(normalizePath(testPath, mustWork = FALSE) %in%
+       normalizePath(paste(repoRoot, untracked[["untracked"]],sep = "/"),
+                     mustWork = FALSE)) {
+      stop("File ", testPath, " is not tracked in repostitory ", repoPath)
     }
   }
   
   return(repo)
-  
 }

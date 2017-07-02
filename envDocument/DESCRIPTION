@@ -1,12 +1,9 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.3.0
-Date: 2017-03-08
-Author: c(
-    person("Donald", "Jackson", , "donald.jackson@bms.com", role = c("aut", "cre")),
-    person("Bristol-Myers Squibb, role = "cph")
-    )
+Version: 2.3.0.1
+Date: 2017-03-30
+Author: Donald Jackson [aut, cre], Bristol-Myers Squibb [cph]
 Maintainer: Donald Jackson <donald.jackson@bms.com>
 Description: Prints out information about the R working environment
     (system, R version,loaded and attached packages and versions) from a single
@@ -14,6 +11,7 @@ Description: Prints out information about the R working environment
     tags, commits and remotes (if available).
 License: GPL (>= 3.0)
 Repository: CRAN
+URL: https://github.com/dgJacks0n/envDocument
 Suggests: git2r(>= 0.15.0),
     knitr(>= 1.13)
 RoxygenNote: 5.0.1
