@@ -15,8 +15,3 @@ to working directory}
 \code{getScriptPath} returns the full path of the script that called this function (if any)
 or NULL if path is not available
 }
-\examples{
-mypath <- getScriptPath()
-
-}
-

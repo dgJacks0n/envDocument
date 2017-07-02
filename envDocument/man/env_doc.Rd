@@ -52,4 +52,3 @@ If outpt = return (default) :A data frame with columns for information
  env_doc("print") # print information to stdout
  info <- env_doc() # return information as a consolidated data frame
 }
-

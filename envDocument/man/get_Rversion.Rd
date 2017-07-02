@@ -12,4 +12,3 @@ Get  information on R version
 \examples{
 Rversion <- getRversion()
 }
-

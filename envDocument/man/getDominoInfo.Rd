@@ -9,4 +9,3 @@ getDominoInfo()
 \description{
 Get information about a Domino run from environment variables
 }
-
