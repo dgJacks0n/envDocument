@@ -26,4 +26,10 @@ Returns a data frame with information on:
 Results are collected in a standardized data frame that can be queried or
 pretty-printed using \code{\link[knitr]{kable}} or similar methods.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/dgJacks0n/envDocument}
+}
 
+}
