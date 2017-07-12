@@ -25,10 +25,12 @@
 #' @param git Include git repository information from \code{\link{getGitInfo}}
 #'   (note: requires \code{git2r})?  Boolean, default TRUE
 #' @param domino Include environment variables from Domino run?
-#'   Boolean, default FALSE
+#'   auto = include if available; 
+#'   on = include with warning if not available; 
+#'   off = do not include
 #'   
-#' @return If outpt = return (default) :A data frame with columns for information 
-#'   type, variable name and value.  NULL for output = print or table
+#' @return If output = return (default): A data frame with columns for information 
+#'   type, variable name and value.  NULL for output = print or output = table
 #'  
 #' @examples
 #'  env_doc("print") # print information to stdout
@@ -36,7 +38,7 @@
 #' @export
 #' 
 env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
-                      packages=TRUE, script=TRUE, git = TRUE, domino = FALSE) {
+                      packages=TRUE, script=TRUE, git = TRUE, domino = c("auto", "on", "off")) {
   
   envinfo <- list()
   
@@ -60,9 +62,13 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
     envinfo$Git <- getGitInfo()
   }
   
-  if(domino) {
+  # should we include domino table?
+  if ((match.arg(domino) == "on")) {
+    envinfo$Domino <- getDominoInfo()
+  } else if(match.arg(domino) == "auto" & any(grepl("^DOMINO_", names(Sys.getenv())))) {
     envinfo$Domino <- getDominoInfo()
   }
+  
   
   # once info is collected either format, print it or return it
   if( match.arg(output) == "table") {
