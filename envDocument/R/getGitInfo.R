@@ -39,19 +39,25 @@ getGitInfo <- function(scriptpath = NA) {
     return(infoNotFound())
   }
   
+  # get branch name
+  branchname <- branches(scriptRepo)[[1]]@name
+  results <- data.frame( Name = "Branch",
+                         Value = branchname)
+ 
    # get last commit info
   lastCommit <- methods::as(scriptRepo, "data.frame")[1,]
   
   # has the file been changed since last commit
   changed <- fileStatus(scriptRepo, scriptpath)
   
-  results <- data.frame( Name = c("Commit Hash", 
-                                  "Commit Time", 
-                                  "Status"),
-                         Value = c(substring(lastCommit$sha, 1, 7), 
-                                   as.character.Date(lastCommit$when), 
-                                   changed) 
-                         )
+  results <- rbind(results,
+                   data.frame( Name = c("Commit Hash", 
+                                        "Commit Time", 
+                                        "Status"),
+                               Value = c(substring(lastCommit$sha, 1, 7), 
+                                         as.character.Date(lastCommit$when), 
+                                         changed) 
+                   ))
   
   # see if commit is tagged
   tagString <- getTag(scriptRepo)
