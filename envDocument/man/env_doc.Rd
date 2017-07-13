@@ -6,7 +6,7 @@
 \usage{
 env_doc(output = c("return", "print", "table"), system = TRUE,
   version = TRUE, packages = TRUE, script = TRUE, git = TRUE,
-  domino = FALSE)
+  domino = c("auto", "on", "off"))
 }
 \arguments{
 \item{output}{How should output be handled? return: return as a 
@@ -29,11 +29,13 @@ Boolean, default TRUE}
 (note: requires \code{git2r})?  Boolean, default TRUE}
 
 \item{domino}{Include environment variables from Domino run?
-Boolean, default FALSE}
+auto = include if available; 
+on = include with warning if not available; 
+off = do not include}
 }
 \value{
-If outpt = return (default) :A data frame with columns for information 
-  type, variable name and value.  NULL for output = print or table
+If output = return (default): A data frame with columns for information 
+  type, variable name and value.  NULL for output = print or output = table
 }
 \description{
 \code{env_doc} prints or returns a data frame with the following information:  

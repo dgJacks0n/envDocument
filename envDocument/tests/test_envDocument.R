@@ -19,7 +19,5 @@ env_doc("print")
 #+ env_table, results = "asis"
 env_doc("table")
 
-
-
 # change to trigger git status
 message("Done")

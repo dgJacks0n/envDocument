@@ -3,17 +3,20 @@
 #' @export
 
 getDominoInfo <- function() {
-  domino_varnames <- c("DOMINO_API_HOST", "DOMINO_PROJECT_NAME", "DOMINO_PROJECT_OWNER",
-                       "DOMINO_RUN_ID", "DOMINO_RUN_NUMBER", "DOMINO_STARTING_USERNAME",
-                       "DOMINO_WORKING_DIR")
-  
-  domino_values <- Sys.getenv(domino_varnames)
+  # get list of domino environment vars
+  domino_varnames <- grep("^DOMINO_", names(Sys.getenv()), value = TRUE)
   
   # Return 'not found' values if no info was found
-  if(nchar(domino_values["DOMINO_RUN_ID"]) == 0) {
+  if(length(domino_varnames) == 0) {
     warning("Domino environment variables not found")
     return(infoNotFound())
   }
+  
+  # drop some values from output
+  no_return <- c("DOMINO_API_HOST", "DOMINO_EXECUTOR_HOSTNAME",
+                 "DOMINO_USER_API_KEY")
+  
+  domino_values <- Sys.getenv(domino_varnames)
   
   # strip port off of DOMINO_API_HOST to get sever
   domino_values["DOMINO_SERVER"] <- sub(":\\d+$", "", 
@@ -29,11 +32,10 @@ getDominoInfo <- function() {
                                            sep = "/")
   domino_values["DOMINO_RUN_URL"] <- paste0(domino_values["DOMINO_RUN_URL"], "#info")  
 
-  
-  
   domino_values <- data.frame(domino_values, stringsAsFactors = FALSE)
   colnames(domino_values) <- "Value"
   
+   
   # format variable names
   domino_values$Name <- sub("^DOMINO_", "", rownames(domino_values))
   domino_values$Name <- gsub("_", " ", domino_values$Name)
@@ -44,6 +46,11 @@ getDominoInfo <- function() {
   }
   
   domino_values <- domino_values[c("Name", "Value")]
+  
+  # drop variables in 'no_return' from output
+  domino_values <- domino_values[!(rownames(domino_values) %in% no_return), ]
+  
+  
   rownames(domino_values) <- NULL
   
   return(domino_values)
