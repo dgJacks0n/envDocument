@@ -8,9 +8,9 @@
 #' 
 #' @aliases get_scriptpath
 #' 
-#' @examples 
-#' mypath <- getScriptPath()
-#' 
+#' @example
+#'\dontrun{ mypath <- getScriptPath() }
+#'
 #' @export
 #' 
 getScriptPath <- function(absolute = TRUE) {

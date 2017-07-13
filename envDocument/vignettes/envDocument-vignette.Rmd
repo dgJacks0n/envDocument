@@ -19,9 +19,11 @@ The `envDocument` package provides a function `env_doc()` which collects informa
 
 The primary purpose is to capture information for inclusion in an analysis report.  As such, the call to env_doc() should be made after all libraries are attached.
 
-
-
 Some functions, especialy `getScriptPath()` (get path to calling script) and `getRepo()` (find git repo for calling script), may be useful in other settings.
+
+Note: if the calling script is not tracked in a git repository then `env_doc()` or `getRepo()` will throw warnings.  These can be disabled by setting `git = FALSE` (see examples).
+
+Version 2.3.1 adds support for Domino Datalab environment reporting.  To add this, set `domino = TRUE` in the call to `env_doc()`.
 
 # Examples
 
@@ -30,14 +32,15 @@ library(envDocument)
 library(knitr)
 
 
-kable(env_doc()) # with git2r installed
-kable(env_doc(git = FALSE)) # without git2r
+env_doc() # with git2r installed
+
+env_doc("table") # pretty-print output using knitr::kable
+
+env_doc(git = FALSE) # without git2r or if script is not trakced.
+
+env_doc(domino = TRUE) # optional - print information on Domino Datalab environment
 ```
 
 The `getScriptPath()` function looks up the name of the script being run.  If called in an interactive context it will return NA.  `get_scriptpath()` is provided as an alias for backwards compatibility.
 
-
-```{r table, echo = TRUE, eval = FALSE}
-env_doc("table")
-```
 
