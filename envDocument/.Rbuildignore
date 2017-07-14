@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^\.R\test_envDocument
 cran-comments.md
+LICENSE.txt
 ^README\.Rmd$
 ^README-.*\.png$
 ^revdep$
