@@ -4,12 +4,14 @@
 #' or NULL if path is not available
 #' 
 #' @param absolute Return absolute path (absolute = TRUE, default) or path relative
-#' to working directory
+#' to working directory (FALSE)
 #' 
 #' @aliases get_scriptpath
 #' 
-#' @example
-#'\dontrun{ mypath <- getScriptPath() }
+#' @examples
+#' \dontrun{ 
+#' mypath <- getScriptPath() 
+#' }
 #'
 #' @export
 #' 

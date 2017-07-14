@@ -4,7 +4,16 @@
 \alias{getDominoInfo}
 \title{Get information about a Domino run from environment variables}
 \usage{
-getDominoInfo()
+getDominoInfo(drop_vars = c("DOMINO_API_HOST", "DOMINO_EXECUTOR_HOSTNAME",
+  "DOMINO_USER_API_KEY"))
+}
+\arguments{
+\item{drop_vars}{Variables that will not be included in results.
+See \url{https://support.dominodatalab.com/hc/en-us/articles/205536355-Domino-environment-variables}
+for a list of variables.}
+}
+\value{
+data frame of Domino environment variables (renamed) and their values
 }
 \description{
 Get information about a Domino run from environment variables
