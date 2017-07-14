@@ -27,7 +27,8 @@ getGitInfo <- function(scriptpath = NA) {
     scriptpath <- try(getScriptPath(), silent = TRUE)
     
     if(class(scriptpath) == "try-error") {
-      warning(scriptpath)
+      warning("Unable to look up git information; could not determine calling script\n",
+              scriptpath)
       return(infoNotFound())
     }
   }
@@ -40,7 +41,7 @@ getGitInfo <- function(scriptpath = NA) {
   }
   
   # get branch name
-  branchname <- branches(scriptRepo)[[1]]@name
+  branchname <- git2r::branches(scriptRepo)[[1]]@name
   results <- data.frame( Name = "Branch",
                          Value = branchname)
  
