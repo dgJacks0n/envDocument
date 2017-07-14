@@ -1,8 +1,14 @@
 #' Get information about a Domino run from environment variables
 #' 
+#' @param drop_vars Variables that will not be included in results
+#' 
+#' @return data frame of Domino environment variables (renamed) and their values
+#' 
 #' @export
 
-getDominoInfo <- function() {
+getDominoInfo <- function(drop_vars = c("DOMINO_API_HOST", 
+                                        "DOMINO_EXECUTOR_HOSTNAME",
+                                        "DOMINO_USER_API_KEY")) {
   # get list of domino environment vars
   domino_varnames <- grep("^DOMINO_", names(Sys.getenv()), value = TRUE)
   
@@ -12,10 +18,7 @@ getDominoInfo <- function() {
     return(infoNotFound())
   }
   
-  # drop some values from output
-  no_return <- c("DOMINO_API_HOST", "DOMINO_EXECUTOR_HOSTNAME",
-                 "DOMINO_USER_API_KEY")
-  
+
   domino_values <- Sys.getenv(domino_varnames)
   
   # strip port off of DOMINO_API_HOST to get sever
@@ -48,7 +51,7 @@ getDominoInfo <- function() {
   domino_values <- domino_values[c("Name", "Value")]
   
   # drop variables in 'no_return' from output
-  domino_values <- domino_values[!(rownames(domino_values) %in% no_return), ]
+  domino_values <- domino_values[!(rownames(domino_values) %in% drop_vars), ]
   
   
   rownames(domino_values) <- NULL
