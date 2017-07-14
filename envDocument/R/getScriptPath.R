@@ -28,7 +28,7 @@ getScriptPath <- function(absolute = TRUE) {
     path <- args
   }
   
-  if(is.null(path)) {
+  if(is.null(path) | is.na(path)) {
     stop("No path information available.")
   }
   
