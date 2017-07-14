@@ -9,8 +9,10 @@ env_doc(output = c("return", "print", "table"), system = TRUE,
   domino = c("auto", "on", "off"))
 }
 \arguments{
-\item{output}{How should output be handled? return: return as a 
-data frame (default); print: print to stdout; table: pretty-print
+\item{output}{How should output be handled? Character, values: 
+return - return as a data frame (default);
+ print - print to stdout; 
+ table - pretty-print
 using knitr::kable (requires package knitr)}
 
 \item{system}{Include OS info from \code{\link{getSysInfo}}? Boolean, 
@@ -28,10 +30,11 @@ Boolean, default TRUE}
 \item{git}{Include git repository information from \code{\link{getGitInfo}}
 (note: requires \code{git2r})?  Boolean, default TRUE}
 
-\item{domino}{Include environment variables from Domino run?
-auto = include if available; 
-on = include with warning if not available; 
-off = do not include}
+\item{domino}{Include Domino Datalab run information from 
+\code{\link{getDominoInfo}}?  Character, values:
+auto - include if available; 
+on - include with warning if not available; 
+off - do not include evn if available}
 }
 \value{
 If output = return (default): A data frame with columns for information 

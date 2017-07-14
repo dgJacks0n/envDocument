@@ -1,7 +1,7 @@
-#' Get information about a Domino Datalab run from environment variables
+#' Get information about a Domino Datalab run from environment variables in the run environment
 #' 
-#' @param drop_vars Character vector of Variables that will not be included in results.  
-#'     See \url{https://support.dominodatalab.com/hc/en-us/articles/205536355-Domino-environment-variables}
+#' @param drop_vars Variables that will not be included in results.  Character vector;
+#'     see \url{https://support.dominodatalab.com/hc/en-us/articles/205536355-Domino-environment-variables}
 #'     for a list of variables.
 #' 
 #' @return data frame of Domino environment variables (renamed) and their values
