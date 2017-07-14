@@ -1,5 +1,12 @@
 # NEWS
 
+# envDocument 2.3.0.4
+Release candidate for CRAN update
+
++ Finalized Domino environment report.  
++ Include git branch name in git values.
++ Additional modifications to error handling.
+
 # envDocument 2.3.0.2
 Development release implementing Domino environment information.  
 
