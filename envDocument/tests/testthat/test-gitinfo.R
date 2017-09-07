@@ -1,3 +1,5 @@
+library(envDocument)
+
 context("gitinfo")
 
 # does git info work?
@@ -7,7 +9,7 @@ test_that("git lookup", {
     skip("git2r not available")
   }
   
-  expect_s3_class(getGitInfo("../../DESCRIPTION"), "data.frame")
+  expect_s3_class(getGitInfo("./test-gitinfo.R"), "data.frame")
 })
 
 
@@ -17,6 +19,6 @@ test_that("finds repo", {
     skip("git2r not available")
   }
   
-  res <- getRepo("../../DESCRIPTION")
+  res <- getRepo("./test-gitinfo.R")
   expect_s4_class(res, "git_repository")
 })
