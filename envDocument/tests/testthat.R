@@ -1,4 +1,5 @@
+Sys.setenv("R_TESTS" = "")
+
 library(testthat)
-library(envDocument)
 
 test_check("envDocument")
