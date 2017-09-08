@@ -1,18 +1,11 @@
 # NEWS
 
-# envDocument 2.3.0.4
-Release candidate for CRAN update
+# envDocument 2.3.1
 
++ Identify runs in Domino Datalab environments and report additional information
++ Added unit tests with `testthat`
 + Finalized Domino environment report.  
 + Include git branch name in git values.
-+ Additional modifications to error handling.
-
-# envDocument 2.3.0.2
-Development release implementing Domino environment information.  
-
-# envDocument 2.3.0.1
-An interim development release with minor changes and bugfixes
-
 + Modified Author section in DESCRIPTION file in an effort to get better formatting.
 + Implemented `try()` calls to handle missing file/package errors more gracefully and consistently.
 
