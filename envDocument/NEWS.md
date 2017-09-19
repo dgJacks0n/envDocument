@@ -1,6 +1,6 @@
 # NEWS
 
-# envDocument 2.3.1
+# envDocument 2.4.0
 
 + Identify runs in Domino Datalab environments and report additional information
 + Added unit tests with `testthat`

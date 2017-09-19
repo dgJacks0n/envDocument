@@ -33,3 +33,7 @@ Useful links:
 }
 
 }
+\author{
+\strong{Maintainer}: Donald Jackson \email{donald.jackson@bms.com}
+
+}

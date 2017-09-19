@@ -11,7 +11,7 @@
 There were no ERRORs or WARNINGs 
 
 NOTES
-This is the first submission of this package.
+This is update relase 2.4.0.  It adds additional functionality and implements bugfixes and improved error handling.
 
 ## Reverse Dependency Checks
 From devtools::revdep_check()
