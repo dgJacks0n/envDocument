@@ -27,7 +27,13 @@ getScriptPath <- function(absolute = TRUE) {
   } else{
     # Rscript and R -f put it in commandArgs
     args <- commandArgs(trailingOnly = FALSE)
-    path <- args
+    
+    if(grepl("--file", args)) {
+      patharg <- grep("--file", args)
+      path <- sub("--file=", "", patharg)
+    } else {
+     path <- grep(".+[R|Rmd|Rnw]$", args, value = TRUE)
+    }
   }
   
   if(is.null(path) | is.na(path)) {
