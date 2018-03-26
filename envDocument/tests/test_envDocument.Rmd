@@ -3,11 +3,21 @@ title: "test_envDocument"
 output: html_document
 ---
 
-Rmarkdown file to test envDocument::env_doc()
+Rmarkdown file to test envDocument::env_doc().
+
+**Note** - if you render this document using `rmarkdown::render()` from a directory other than the one where this file is located you may encounter issues with determining the script path.  
+This can be addressed by specifiying a root directory in the `setup` chunk or as an argument to `render()`:
+
+```
+# example: render this document starting from the top-level project directory
+rmarkdown::render("./envDocument/tests/test_envDocument.Rmd", envir = new.env(), knit_root_dir = here::here())
+```
 
 ```{r setup}
 library(envDocument) # build & reload doesn't automatically knit .rmd files
 library(knitr)
+
+# opts_knit$set(root.dir = "../..") # alternative way to set root directory using knitr::opts_knit()
 
 ```
 
