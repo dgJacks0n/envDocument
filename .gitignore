@@ -3,5 +3,6 @@
 .RData
 *.html
 */*.Rd
+*.Rd
 *~
 
