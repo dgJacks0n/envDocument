@@ -40,16 +40,31 @@ getGitInfo <- function(scriptpath = NA) {
     return(infoNotFound())
   }
   
-  # get branch name
-  branchname <- git2r::branches(scriptRepo)[[1]]@name
+  # get branch information.  Need to support git2r >= v0.22.1 (S3) and < v0.21 (S4)
+  branch <- git2r::branches(scriptRepo)[[1]]
+  
+  # firs try pre-0.22 (S4)
+  branchname <- try(branch@name, silent = TRUE)
+  
+  # if that fails, try post-0.22
+  if(class(branchname) == "try-error") {
+    branchname <- try(branch$name, silent = TRUE)
+  }
+  
+  # if both fail, give up
+  if(class(branchname) == "try-error" | is.null(branchname)) {
+    branchname <- "Not available"
+  }
+  
   results <- data.frame( Name = "Branch",
                          Value = branchname)
  
    # get last commit info
-  lastCommit <- methods::as(scriptRepo, "data.frame")[1,]
+  # lastCommit <- methods::as(scriptRepo, "data.frame")[1,] # keep in case v.0.22.1+ methods aren't back-compatible
+  lastCommit <- as.data.frame(git2r::commits(scriptRepo, n = 1)[[1]])
   
   # has the file been changed since last commit
-  changed <- fileStatus(scriptRepo, scriptpath)
+  changed <- fileStatus(scriptRepo, scriptpath) # need to update for git2r >= v0.22.1
   
   results <- rbind(results,
                    data.frame( Name = c("Commit Hash", 
