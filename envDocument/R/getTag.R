@@ -17,8 +17,24 @@ getTag <- function(repo) {
   
   tag <- tagList[[length(tagList)]]
   
+  # pull out sha for tag.  Try old (S4) way, then new (S3)
+  tagSha <- try(tag@sha, silent = TRUE)
+  
+  if(class(tagSha) == "try-error") {
+    tagSha <- tag$sha
+  }
+  
+  # same to get sha for last commit
+  lastCommit <- git2r::commits(repo, n = 1)[[1]]
+  
+  lastSha <- try(lastCommit@sha, silent = TRUE)
+  
+  if(class(lastSha) == "try-error") {
+    lastSha <- lastCommit$sha
+  }
+  
   # do tags match?  If not, return NULL
-  if(tag@sha != git2r::commits(repo)[[1]]@sha) {
+  if(tagSha != lastSha) {
     return(NULL)
   }
   
