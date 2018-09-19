@@ -20,5 +20,5 @@ test_that("finds repo", {
   }
   
   res <- getRepo("./test-gitinfo.R")
-  expect_s4_class(res, "git_repository")
+  expect_s3_class(res, "git_repository")
 })
