@@ -64,7 +64,7 @@ getGitInfo <- function(scriptpath = NA) {
   lastCommit <- as.data.frame(git2r::commits(scriptRepo, n = 1)[[1]])
   
   # has the file been changed since last commit
-  changed <- fileStatus(scriptRepo, scriptpath) # need to update for git2r >= v0.22.1
+  changed <- envDocument:::fileStatus(scriptRepo, scriptpath) # need to update for git2r >= v0.22.1
   
   results <- rbind(results,
                    data.frame( Name = c("Commit Hash", 
@@ -76,7 +76,7 @@ getGitInfo <- function(scriptpath = NA) {
                    ))
   
   # see if commit is tagged
-  tagString <- getTag(scriptRepo)
+  tagString <- envDocument:::getTag(scriptRepo)
   
   if(!is.null(tagString)) {
     results <- rbind(results, data.frame( Name = "Tag", Value = tagString))
