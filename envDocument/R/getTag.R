@@ -29,12 +29,10 @@ getTag <- function(repo) {
   # same to get sha for last commit
   lastCommit <- git2r::commits(repo, n = 1)[[1]]
   
-  lastCommit <- git2r::commits(scriptRepo, n = 1)[[1]]
-  
   # ifelse isn't working as expected here.
   last <- NULL
   if(isS4(lastCommit)) {
-    last <- methods::as(scriptRepo, "data.frame")[1,]
+    last <- methods::as(repo, "data.frame")[1,]
   } else {
     last <- as.data.frame(lastCommit) # will methods::as work on S3?
   }
