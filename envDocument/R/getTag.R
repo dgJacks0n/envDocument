@@ -18,7 +18,9 @@ getTag <- function(repo) {
   tag <- tagList[[length(tagList)]]
   
   # pull out sha for tag.  Try old (S4) way, then new (S3)
-  tagSha <- try(tag@sha, silent = TRUE)
+  tagSha <- ifelse(isS4(tag),
+                   try(tag@sha, silent = TRUE),
+                   try(tag$sha, silent = TRUE))
   
   if(class(tagSha) == "try-error") {
     tagSha <- tag$sha
@@ -27,14 +29,20 @@ getTag <- function(repo) {
   # same to get sha for last commit
   lastCommit <- git2r::commits(repo, n = 1)[[1]]
   
-  lastSha <- try(lastCommit@sha, silent = TRUE)
+  lastCommit <- git2r::commits(scriptRepo, n = 1)[[1]]
   
-  if(class(lastSha) == "try-error") {
-    lastSha <- lastCommit$sha
+  # ifelse isn't working as expected here.
+  last <- NULL
+  if(isS4(lastCommit)) {
+    last <- methods::as(scriptRepo, "data.frame")[1,]
+  } else {
+    last <- as.data.frame(lastCommit) # will methods::as work on S3?
   }
   
+  
+
   # do tags match?  If not, return NULL
-  if(tagSha != lastSha) {
+  if(tagSha != last$sha) {
     return(NULL)
   }
   
