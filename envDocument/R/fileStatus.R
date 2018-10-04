@@ -6,10 +6,12 @@ fileStatus <- function(repo, testPath) {
   
   # need to get top level path for repo
   # try S4 call first, then S3
-  repoPath <- try(repo@path, silent = TRUE)
+  repoPath <- ifelse(isS4(repo),
+    try(repo@path, silent = TRUE),
+    try(repo$path, silent = TRUE))
   
   if(class(repoPath) == "try-error") {
-    repoPath <- repo$path
+    return(infoNotFound())
   }
   
   repoRoot <- sub("/\\.git/*", "", repoPath,  fixed = FALSE)
