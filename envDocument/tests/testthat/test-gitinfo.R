@@ -9,7 +9,7 @@ test_that("git lookup", {
     skip("git2r not available")
   }
   
-  expect_s3_class(getGitInfo("./test-gitinfo.R"), "data.frame")
+  expect_is(getGitInfo("./test-gitinfo.R"), "data.frame")
 })
 
 
@@ -20,5 +20,6 @@ test_that("finds repo", {
   }
   
   res <- getRepo("./test-gitinfo.R")
-  expect_s3_class(res, "git_repository")
+  
+  expect_is(res, "git_repository")
 })
