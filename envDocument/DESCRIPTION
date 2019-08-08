@@ -2,7 +2,7 @@ Package: envDocument
 Type: Package
 Title: Document the R Working Environment
 Version: 2.4.1
-Date: 2018-10-04
+Date: 2019-08-08
 Authors@R: person("Donald", "Jackson", email = "donald.jackson@bms.com",
                   role = c("aut", "cre"))
 Description: Prints out information about the R working environment
