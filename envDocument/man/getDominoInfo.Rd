@@ -4,8 +4,8 @@
 \alias{getDominoInfo}
 \title{Get information about a Domino Datalab run from environment variables in the run environment}
 \usage{
-getDominoInfo(drop_vars = c("DOMINO_API_HOST", "DOMINO_EXECUTOR_HOSTNAME",
-  "DOMINO_USER_API_KEY"))
+getDominoInfo(drop_vars = c("DOMINO_API_HOST",
+  "DOMINO_EXECUTOR_HOSTNAME", "DOMINO_USER_API_KEY"))
 }
 \arguments{
 \item{drop_vars}{Variables that will not be included in results.  Character vector;

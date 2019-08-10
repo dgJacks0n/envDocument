@@ -9,7 +9,9 @@ test_that("git lookup", {
     skip("git2r not available")
   }
   
-  expect_s3_class(getGitInfo("./test-gitinfo.R"), "data.frame")
+  # don't run this test on CRAN
+  skip_on_cran()
+  expect_is(getGitInfo("./test-gitinfo.R"), "data.frame")
 })
 
 
@@ -19,6 +21,8 @@ test_that("finds repo", {
     skip("git2r not available")
   }
   
+  # don't run this test on CRAN
+  skip_on_cran()
   res <- getRepo("./test-gitinfo.R")
-  expect_s4_class(res, "git_repository")
+  expect_is(res, "git_repository")
 })

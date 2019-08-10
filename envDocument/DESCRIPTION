@@ -1,8 +1,8 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.4.0
-Date: 2017-09-018
+Version: 2.4.1
+Date: 2019-08-08
 Authors@R: person("Donald", "Jackson", email = "donald.jackson@bms.com",
                   role = c("aut", "cre"))
 Description: Prints out information about the R working environment
@@ -13,11 +13,11 @@ License: GPL (>= 3.0)
 Repository: CRAN
 URL: https://github.com/dgJacks0n/envDocument
 Suggests:
-    git2r(>= 0.15.0),
+    git2r(>= 0.22.1),
     knitr(>= 1.13),
     stringr(>= 1.2.0),
     testthat(>= 1.0.2)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 VignetteBuilder: knitr
 Imports:
     utils,

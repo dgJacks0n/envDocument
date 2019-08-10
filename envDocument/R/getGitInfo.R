@@ -40,23 +40,48 @@ getGitInfo <- function(scriptpath = NA) {
     return(infoNotFound())
   }
   
-  # get branch name
-  branchname <- git2r::branches(scriptRepo)[[1]]@name
+  # get branch information.  Need to support git2r >= v0.22.1 (S3) and < v0.21 (S4)
+  branch <- git2r::branches(scriptRepo)[[1]]
+  
+  # try S4 method for git2r v <= 0.2.1 and S3 for later
+  branchname <- ifelse(isS4(branch),
+                       try(branch@name, silent = TRUE),
+                       try(branch$name, silent = TRUE)
+  )
+  
+  
+  # if both fail, give up
+  if(class(branchname) == "try-error" | is.null(branchname)) {
+    branchname <- infoNotFound()
+  }
+  
+  
   results <- data.frame( Name = "Branch",
                          Value = branchname)
  
    # get last commit info
-  lastCommit <- methods::as(scriptRepo, "data.frame")[1,]
+  # get last commit info, again with S4 or S3
+  #lastCommit <- as.data.frame(git2r::commits(scriptRepo, n = 1)[[1]])
+  lastCommit <- git2r::commits(scriptRepo, n = 1)[[1]]
+  
+  # ifelse isn't working as expected here.
+  last <- NULL
+  if(isS4(lastCommit)) {
+    last <- methods::as(scriptRepo, "data.frame")[1,]
+  } else {
+    last <- as.data.frame(lastCommit) # will methods::as work on S3?
+  }
+  
   
   # has the file been changed since last commit
-  changed <- fileStatus(scriptRepo, scriptpath)
+  changed <- fileStatus(scriptRepo, scriptpath) # need to update for git2r >= v0.22.1
   
   results <- rbind(results,
                    data.frame( Name = c("Commit Hash", 
                                         "Commit Time", 
                                         "Status"),
-                               Value = c(substring(lastCommit$sha, 1, 7), 
-                                         as.character.Date(lastCommit$when), 
+                               Value = c(substring(last$sha, 1, 7), 
+                                         as.character.Date(last$when), 
                                          changed) 
                    ))
   
