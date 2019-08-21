@@ -15,20 +15,17 @@ getTag <- function(repo) {
     return(NULL)
   }
   
-  tag <- tagList[[length(tagList)]]
-  
-  # pull out sha for tag.  Try old (S4) way, then new (S3)
-  tagSha <- ifelse(isS4(tag),
-                   try(tag@sha, silent = TRUE),
-                   try(tag$sha, silent = TRUE))
-  
-  if(class(tagSha) == "try-error") {
-    tagSha <- tag$sha
+  if(isS4(tagList[[1]])) {
+    tagInfo <- lapply(tagList, parseS4Tag)
+  } else {
+    tagInfo <- lapply(tagList, parseS3Tag)
   }
   
-  # same to get sha for last commit
-  lastCommit <- git2r::commits(repo, n = 1)[[1]]
+  tagInfo <- do.call("rbind", tagInfo)
   
+  # get sha for last commit
+  lastCommit <- git2r::commits(repo, n = 1)[[1]]
+
   # ifelse isn't working as expected here.
   last <- NULL
   if(isS4(lastCommit)) {
@@ -36,17 +33,46 @@ getTag <- function(repo) {
   } else {
     last <- as.data.frame(lastCommit) # will methods::as work on S3?
   }
-  
-  
 
-  # do tags match?  If not, return NULL
-  if(tagSha != last$sha) {
-    return(NULL)
-  }
+  # do any tag targets match last commit? if not, return null
+  if( !any(last$sha == tagInfo$target) ) { return(NULL) }
   
+  # return info for tag that matches target
+  tagTarget <- tagInfo[ (last$sha == tagInfo$target), ]
   
-  tagString <- paste( "[", substring(tag@target, 1,6), "] ", tag@name, sep = "" )
+  tagString <- paste( "[", substring(tagTarget$target, 1,6), "] ", tagTarget$name, 
+                      sep = "" )
   return(tagString)
   
 }
 
+# parseS3Tags
+#
+# function to parse individual tags using s# structure
+
+parseS3Tag <- function(thisTag) {
+  thisTagTime <- thisTag$tagger$when$time
+  
+  thisTagInfo <- data.frame( sha = thisTag$sha,
+                             target= thisTag$target,
+                             when = thisTagTime,
+                             name = thisTag$name,
+                             message = thisTag$message,
+                             person = thisTag$tagger$name,
+                             email = thisTag$tagger$email
+                             )
+  
+  return(thisTagInfo)
+  
+}
+
+
+# parseS4Tag
+# parse individual tag using S4 calls
+parseS4Tag <- function(thisTag) {
+  browser()
+  
+  # add functions to get info from S4 based objects
+  
+  return(thisTagInfo)
+}
