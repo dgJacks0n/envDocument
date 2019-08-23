@@ -41,12 +41,14 @@ getGitInfo <- function(scriptpath = NA) {
   }
   
   # get branch information.  Need to support git2r >= v0.22.1 (S3) and < v0.21 (S4)
-  branch <- git2r::branches(scriptRepo)[[1]]
+  # branch <- git2r::branches(scriptRepo)[[1]]
+  # head isn't always first, use repository_head instead.
+  local <- git2r::repository_head(scriptRepo)
   
   # try S4 method for git2r v <= 0.2.1 and S3 for later
-  branchname <- ifelse(isS4(branch),
-                       try(branch@name, silent = TRUE),
-                       try(branch$name, silent = TRUE)
+  branchname <- ifelse(isS4(local),
+                       try(local@name, silent = TRUE),
+                       try(local$name, silent = TRUE)
   )
   
   
@@ -92,6 +94,7 @@ getGitInfo <- function(scriptpath = NA) {
     results <- rbind(results, data.frame( Name = "Tag", Value = tagString))
   }
   
+  # get remote based on local head
   remotes <- remoteInfo(scriptRepo)
   results <- rbind(results, remotes)
   
