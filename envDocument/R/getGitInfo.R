@@ -43,7 +43,15 @@ getGitInfo <- function(scriptpath = NA) {
   # get branch information.  Need to support git2r >= v0.22.1 (S3) and < v0.21 (S4)
   # branch <- git2r::branches(scriptRepo)[[1]]
   # head isn't always first, use repository_head instead.
-  local <- git2r::repository_head(scriptRepo)
+  if( isS4(scriptRepo)) {
+    local <- try(git2r::head(scriptRepo)) 
+  } else {
+    local <- try(git2r::repository_head(scriptRepo)) 
+  }
+  
+  if(class(local) == "try_error" | is.null(local)) {
+    return(infoNotFound())
+  }
   
   # try S4 method for git2r v <= 0.2.1 and S3 for later
   branchname <- ifelse(isS4(local),

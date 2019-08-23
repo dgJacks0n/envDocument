@@ -70,8 +70,16 @@ parseS3Tag <- function(thisTag) {
 # parseS4Tag
 # parse individual tag using S4 calls
 parseS4Tag <- function(thisTag) {
-  browser()
+  thisTagTime <- thisTag@tagger@when@time
   
+  thisTagInfo <- data.frame(sha = thisTag@sha,
+                            target = thisTag@target,
+                            when =  thisTagTime,
+                              name = thisTag@name,
+                            message  = thisTag@message,
+                            person = thisTag@tagger@name,
+                            email = thisTag@tagger@email
+                            )
   # add functions to get info from S4 based objects
   
   return(thisTagInfo)
