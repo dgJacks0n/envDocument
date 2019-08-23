@@ -1,8 +1,8 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.4.1
-Date: 2019-08-08
+Version: 2.4.1.9000
+Date: 2019-08-22
 Authors@R: person("Donald", "Jackson", email = "donald.jackson@bms.com",
                   role = c("aut", "cre"))
 Description: Prints out information about the R working environment
@@ -17,7 +17,7 @@ Suggests:
     knitr(>= 1.13),
     stringr(>= 1.2.0),
     testthat(>= 1.0.2)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Imports:
     utils,
