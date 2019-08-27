@@ -48,18 +48,33 @@ getTag <- function(repo) {
 
 # parseS3Tags
 #
-# function to parse individual tags using s# structure
+# function to parse individual tags using S3 structure
 
 parseS3Tag <- function(thisTag) {
-  thisTagTime <- thisTag$tagger$when$time
+  # if the repo has any lightweight tags, tagger is in author.
+  # otherwise it's in tagger
   
-  thisTagInfo <- data.frame( sha = thisTag$sha,
-                             target= thisTag$target,
+  if("tagger" %in% names(thisTag)) {
+    tagger <- thisTag$tagger
+    tagName <- thisTag$name
+    tagTarget <- thisTag$target
+  } else if ("author" %in% names(thisTag)) {
+    tagger <- thisTag$author
+    tagName <- NA
+    tagTarget <- thisTag$sha
+  } else {
+    return(NULL)
+  }
+  
+  thisTagTime <- tagger$when$time
+  
+  thisTagInfo <- data.frame( #sha = thisTag$sha,
+                             target= tagTarget,
                              when = thisTagTime,
-                             name = thisTag$name,
+                             name = tagName,
                              message = thisTag$message,
-                             person = thisTag$tagger$name,
-                             email = thisTag$tagger$email
+                             person = tagger$name,
+                             email = tagger$email
                              )
   
   return(thisTagInfo)
