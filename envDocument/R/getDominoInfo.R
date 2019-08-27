@@ -24,11 +24,11 @@ getDominoInfo <- function(drop_vars = c("DOMINO_API_HOST",
   domino_values <- Sys.getenv(domino_varnames)
   
   # strip port off of DOMINO_API_HOST to get sever
-  domino_values["DOMINO_SERVER"] <- sub(":\\d+$", "", 
-                                        domino_values["DOMINO_API_HOST"])
+  #domino_values["DOMINO_SERVER"] <- sub(":\\d+$", "", 
+   #                                     domino_values["DOMINO_API_HOST"])
   
   # build url
-  domino_values["DOMINO_RUN_URL"] <- paste(domino_values["DOMINO_SERVER"],
+  domino_values["DOMINO_RUN_URL"] <- paste(domino_values["DOMINO_USER_HOST"],
                                            "u",
                                            domino_values["DOMINO_PROJECT_OWNER"],
                                            domino_values["DOMINO_PROJECT_NAME"],
