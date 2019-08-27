@@ -51,15 +51,19 @@ getTag <- function(repo) {
 # function to parse individual tags using s# structure
 
 parseS3Tag <- function(thisTag) {
-  thisTagTime <- thisTag$tagger$when$time
+  
+  # annotated tags store author and tiem in'tagger', lightweight use 'author'.
+  tagger <- ifelse(("tagger" %in% names(thisTag)), thisTag$tagger, thisTag$author)
+  
+  thisTagTime <- tagger$when$time
   
   thisTagInfo <- data.frame( sha = thisTag$sha,
                              target= thisTag$target,
                              when = thisTagTime,
                              name = thisTag$name,
                              message = thisTag$message,
-                             person = thisTag$tagger$name,
-                             email = thisTag$tagger$email
+                             person = tagger$name,
+                             email = tagger$email
                              )
   
   return(thisTagInfo)
