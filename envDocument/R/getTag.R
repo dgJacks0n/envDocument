@@ -52,20 +52,29 @@ getTag <- function(repo) {
 
 parseS3Tag <- function(thisTag) {
   
-  # annotated tags store author and tiem in'tagger', lightweight use 'author'.
-  tagger <- ifelse(("tagger" %in% names(thisTag)), thisTag$tagger, thisTag$author)
-  
-  thisTagTime <- tagger$when$time
-  
-  thisTagInfo <- data.frame( sha = thisTag$sha,
+  # annotated tags come back as git tag objects, lightweight come back as git commits
+  if(class(thisTag) == "git_tag") {
+    thisTagInfo <- data.frame( sha = thisTag$sha,
                              target= thisTag$target,
-                             when = thisTagTime,
+                             when = thisTag$tagger$when$time,
                              name = thisTag$name,
                              message = thisTag$message,
-                             person = tagger$name,
-                             email = tagger$email
+                             person = thisTag$tagger$name,
+                             email = thisTag$tagger$email
                              )
-  
+  } else if (class(thisTag) == "git_commit") {
+    thisTagInfo <- data.frame( sha = "Not Available",
+                               target= thisTag$sha,
+                               when = thisTag$author$when$time,
+                               name = "Not Available",
+                               message = thisTag$message,
+                               person = thisTag$author$name,
+                               email = thisTag$author$email
+    )
+  } else {
+    warning("Unhandled class: ", class(thisTag))
+    return (NULL)
+  }
   return(thisTagInfo)
   
 }
