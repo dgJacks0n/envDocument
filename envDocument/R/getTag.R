@@ -15,24 +15,14 @@ getTag <- function(repo) {
     return(NULL)
   }
   
-  if(isS4(tagList[[1]])) {
-    tagInfo <- lapply(tagList, parseS4Tag)
-  } else {
     tagInfo <- lapply(tagList, parseS3Tag)
-  }
-  
+
   tagInfo <- do.call("rbind", tagInfo)
   
   # get sha for last commit
   lastCommit <- git2r::commits(repo, n = 1)[[1]]
 
-  # ifelse isn't working as expected here.
-  last <- NULL
-  if(isS4(lastCommit)) {
-    last <- methods::as(repo, "data.frame")[1,]
-  } else {
     last <- as.data.frame(lastCommit) # will methods::as work on S3?
-  }
 
   # do any tag targets match last commit? if not, return null
   if( !any(last$sha == tagInfo$target) ) { return(NULL) }
@@ -77,23 +67,4 @@ parseS3Tag <- function(thisTag) {
   }
   return(thisTagInfo)
   
-}
-
-
-# parseS4Tag
-# parse individual tag using S4 calls
-parseS4Tag <- function(thisTag) {
-  thisTagTime <- thisTag@tagger@when@time
-  
-  thisTagInfo <- data.frame(sha = thisTag@sha,
-                            target = thisTag@target,
-                            when =  thisTagTime,
-                              name = thisTag@name,
-                            message  = thisTag@message,
-                            person = thisTag@tagger@name,
-                            email = thisTag@tagger@email
-                            )
-  # add functions to get info from S4 based objects
-  
-  return(thisTagInfo)
 }
