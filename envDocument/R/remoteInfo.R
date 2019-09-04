@@ -6,11 +6,7 @@ remoteInfo <- function(repo) {
   if(length(git2r::remotes(repo)) == 0) { return( infoNotFound() )}
   
   # get remote based on local head
-  if( isS4(repo)) {
-    local <- try(git2r::head(repo)) 
-  } else {
-    local <- try(git2r::repository_head(repo)) 
-  }
+  local <- try(git2r::repository_head(repo)) 
   
   if(class(local) == "try_error" | is.null(local)) {
     return(infoNotFound())
