@@ -15,38 +15,59 @@ getTag <- function(repo) {
     return(NULL)
   }
   
-  tag <- tagList[[length(tagList)]]
-  
-  # pull out sha for tag.  Try old (S4) way, then new (S3)
-  tagSha <- ifelse(isS4(tag),
-                   try(tag@sha, silent = TRUE),
-                   try(tag$sha, silent = TRUE))
-  
-  if(class(tagSha) == "try-error") {
-    tagSha <- tag$sha
-  }
-  
-  # same to get sha for last commit
-  lastCommit <- git2r::commits(repo, n = 1)[[1]]
-  
-  # ifelse isn't working as expected here.
-  last <- NULL
-  if(isS4(lastCommit)) {
-    last <- methods::as(repo, "data.frame")[1,]
-  } else {
-    last <- as.data.frame(lastCommit) # will methods::as work on S3?
-  }
-  
-  
+  tagInfo <- lapply(tagList, parseS3Tag)
 
-  # do tags match?  If not, return NULL
-  if(tagSha != last$sha) {
-    return(NULL)
-  }
+  tagInfo <- do.call("rbind", tagInfo)
   
+  # get sha for last commit
+  lastCommit <- git2r::commits(repo, n = 1)[[1]]
+
+  last <- as.data.frame(lastCommit) # will methods::as work on S3?
+
+
+  # do any tag targets match last commit? if not, return null
+  if( !any(last$sha == tagInfo$target) ) { return(NULL) }
   
-  tagString <- paste( "[", substring(tag@target, 1,6), "] ", tag@name, sep = "" )
+  # return info for tag that matches target
+  tagTarget <- tagInfo[ (last$sha == tagInfo$target), ]
+  
+  tagString <- paste( "[", substring(tagTarget$target, 1,6), "] ", tagTarget$name, 
+                      sep = "" )
   return(tagString)
   
 }
 
+# parseS3Tags
+#
+# function to parse individual tags using S3 structure
+
+parseS3Tag <- function(thisTag) {
+  # if the repo has any lightweight tags, tagger is in author.
+  # otherwise it's in tagger
+  
+  if("tagger" %in% names(thisTag)) {
+    tagger <- thisTag$tagger
+    tagName <- thisTag$name
+    tagTarget <- thisTag$target
+  } else if ("author" %in% names(thisTag)) {
+    tagger <- thisTag$author
+    tagName <- NA
+    tagTarget <- thisTag$sha
+  } else {
+    return(NULL)
+  }
+  
+  thisTagTime <- tagger$when$time
+  
+  thisTagInfo <- data.frame( #sha = thisTag$sha,
+                             target= tagTarget,
+                             when = thisTagTime,
+                             name = tagName,
+                             message = thisTag$message,
+                             person = tagger$name,
+                             email = tagger$email
+                             )
+  
+  return(thisTagInfo)
+  
+}

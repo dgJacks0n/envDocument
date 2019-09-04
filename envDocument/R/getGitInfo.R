@@ -40,17 +40,15 @@ getGitInfo <- function(scriptpath = NA) {
     return(infoNotFound())
   }
   
-  # get branch information.  Need to support git2r >= v0.22.1 (S3) and < v0.21 (S4)
-  branch <- git2r::branches(scriptRepo)[[1]]
+  # get branch information.  
+  local <- try(git2r::repository_head(scriptRepo)) 
+
+  if(class(local) == "try_error" | is.null(local)) {
+    return(infoNotFound())
+  }
   
-  # try S4 method for git2r v <= 0.2.1 and S3 for later
-  branchname <- ifelse(isS4(branch),
-                       try(branch@name, silent = TRUE),
-                       try(branch$name, silent = TRUE)
-  )
+  branchname <- try(local$name, silent = TRUE)
   
-  
-  # if both fail, give up
   if(class(branchname) == "try-error" | is.null(branchname)) {
     branchname <- infoNotFound()
   }
@@ -60,18 +58,12 @@ getGitInfo <- function(scriptpath = NA) {
                          Value = branchname)
  
    # get last commit info
-  # get last commit info, again with S4 or S3
-  #lastCommit <- as.data.frame(git2r::commits(scriptRepo, n = 1)[[1]])
   lastCommit <- git2r::commits(scriptRepo, n = 1)[[1]]
   
   # ifelse isn't working as expected here.
   last <- NULL
-  if(isS4(lastCommit)) {
-    last <- methods::as(scriptRepo, "data.frame")[1,]
-  } else {
-    last <- as.data.frame(lastCommit) # will methods::as work on S3?
-  }
-  
+
+  last <- as.data.frame(lastCommit) # will methods::as work on S3?
   
   # has the file been changed since last commit
   changed <- fileStatus(scriptRepo, scriptpath) # need to update for git2r >= v0.22.1
@@ -92,6 +84,7 @@ getGitInfo <- function(scriptpath = NA) {
     results <- rbind(results, data.frame( Name = "Tag", Value = tagString))
   }
   
+  # get remote based on local head
   remotes <- remoteInfo(scriptRepo)
   results <- rbind(results, remotes)
   
