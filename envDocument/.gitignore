@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+*.Rd
 /test_envDocument.md
 /test_envDocument.html
 inst/doc
