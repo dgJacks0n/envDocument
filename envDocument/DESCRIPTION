@@ -16,7 +16,7 @@ Suggests:
     knitr(>= 1.13),
     stringr(>= 1.2.0),
     testthat(>= 1.0.2)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
 Imports:
       git2r(>= 0.22.1),
