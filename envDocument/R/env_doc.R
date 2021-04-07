@@ -23,9 +23,11 @@
 #' @param packages Include attached packages with repository and version from 
 #'   \code{\link{getPackageInfo}}? Boolean, default TRUE
 #' @param script Include script path and modification time from 
-#'   \code{\link{getScriptInfo}}? Boolean, default TRUE
+#'   \code{\link{getScriptInfo}}? Boolean, default TRUE for non-interactive runs and
+#'   FALSE for interactive runs
 #' @param git Include git repository information from \code{\link{getGitInfo}}
-#'   (note: requires \code{git2r})?  Boolean, default TRUE
+#'   (note: requires \code{git2r})?  Boolean, default TRUE for  non-interactive runs
+#'   and FALSE for interactive runs
 #' @param domino Include Domino Datalab run information from 
 #'   \code{\link{getDominoInfo}}?  Character, values:
 #'   auto - include if available; 
@@ -41,7 +43,7 @@
 #' @export
 #' 
 env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
-                      packages=TRUE, script=TRUE, git = TRUE, domino = c("auto", "on", "off")) {
+                      packages=TRUE, script=!(interactive()), git = !(interactive()), domino = c("auto", "on", "off")) {
   
   envinfo <- list()
   
