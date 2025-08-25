@@ -3,12 +3,15 @@ title: "test_envDocument"
 format: html
 ---
 
-Rmarkdown file to test envDocument::env_doc()
+Rmarkdown file to test envDocument::env_doc() from a Quarto document.
 
-```{r setup}
+Note: this requires Quarto version 1.7 or higher
+
+```{r}
+#| label: setup
+
 library(envDocument) # build & reload doesn't automatically knit .rmd files
 library(knitr)
-
 ```
 
 Calling `env_doc` without an output will return a single data frame that can be printed using `knitr::kable` or other output formatting utilities.  
