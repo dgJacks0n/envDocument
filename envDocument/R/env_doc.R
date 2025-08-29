@@ -26,6 +26,8 @@
 #'   \code{\link{getScriptInfo}}? Boolean, default TRUE
 #' @param git Include git repository information from \code{\link{getGitInfo}}
 #'   (note: requires \code{git2r})?  Boolean, default TRUE
+#' @param renv Include \code{renv} status information from 
+#'  \code{\link{getRenvStatus}}? Boolean, default TRUE 
 #' @param domino Include Domino Datalab run information from 
 #'   \code{\link{getDominoInfo}}?  Character, values:
 #'   auto - include if available; 
@@ -41,7 +43,8 @@
 #' @export
 #' 
 env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
-                      packages=TRUE, script=TRUE, git = TRUE, domino = c("auto", "on", "off")) {
+                      packages=TRUE, script=TRUE, git = TRUE, 
+                      renv=TRUE, domino = c("auto", "on", "off")) {
   
   envinfo <- list()
   
@@ -63,6 +66,10 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   
   if(git) {
     envinfo$Git <- getGitInfo()
+  }
+  
+  if(renv) {
+    envinfo$Renv <- getRenvStatus()
   }
   
   # should we include domino table?
