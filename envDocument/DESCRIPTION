@@ -1,7 +1,7 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.4.1.9003
+Version: 2.4.1.9018
 Date: 2019-08-29
 Authors@R: person("Donald", "Jackson", email = "14615921+dgJacks0n@users.noreply.github.com",
                   role = c("aut", "cre"))
@@ -16,7 +16,7 @@ Suggests:
     knitr(>= 1.13),
     stringr(>= 1.2.0),
     testthat(>= 1.0.2)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Imports:
       git2r(>= 0.22.1),
