@@ -25,13 +25,17 @@ getRenvStatus <- function(project_root = NA) {
     }
   } else {
     project_root <- NULL
+    #project_root <- here::here()
   }
+  
   
   # Use purr::quietly to capture results and output from renv::status
   q_status <- purrr::quietly(renv::status)
   
   myresult <- q_status(project_root)
-  
+
+  message("Checking ", renv:::renv_project_find(), " for Renv lockfile")
+    
   # output will be in myresult$output
   myoutput <- myresult$output
   
@@ -39,6 +43,12 @@ getRenvStatus <- function(project_root = NA) {
   
   myreturn <- data.frame(Name = "Renv Status",
                          Value = myoutput)
+  
+  # for debuging renv status
+  myreturn <- rbind(myreturn,
+                    data.frame(Name = "Renv Lockfile Path",
+                               Value = renv:::renv_project_find()))
+  
   
   # add lockfile
   # note: renv::paths$lockfile() returns the file name it's looking for
