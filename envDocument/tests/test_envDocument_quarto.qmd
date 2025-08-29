@@ -1,6 +1,9 @@
 ---
 title: "test_envDocument"
 format: html
+project:
+  execute-dir: project
+  
 ---
 
 Rmarkdown file to test envDocument::env_doc() from a Quarto document.
