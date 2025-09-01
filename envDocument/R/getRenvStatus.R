@@ -30,25 +30,22 @@ getRenvStatus <- function(project_root = NA) {
   
   
   # Use purr::quietly to capture results and output from renv::status
-  q_status <- purrr::quietly(renv::status)
+  #q_status <- purrr::quietly(renv::status)
   
-  myresult <- q_status(project_root)
+  #myresult <- q_status(project_root)
+  
+ utils::capture.output(myresult <- renv::status(project_root), 
+                file = nullfile())
 
-  message("Checking ", renv:::renv_project_find(), " for Renv lockfile")
-    
-  # output will be in myresult$output
-  myoutput <- myresult$output
+ # also get output message renv:status prints
+  myoutput <- utils::capture.output(renv::status(project_root))
   
-  myoutput <- gsub("\\n", " ", myoutput)
+  myoutput <- grep("\\w+", myoutput, value = TRUE)
+  
+  myoutput <- paste(myoutput, collapse = "\n")
   
   myreturn <- data.frame(Name = "Renv Status",
                          Value = myoutput)
-  
-  # for debuging renv status
-  myreturn <- rbind(myreturn,
-                    data.frame(Name = "Renv Lockfile Path",
-                               Value = renv:::renv_project_find()))
-  
   
   # add lockfile
   # note: renv::paths$lockfile() returns the file name it's looking for
@@ -57,11 +54,28 @@ getRenvStatus <- function(project_root = NA) {
   
   if(file.exists(lockfile)) {
     myreturn <- rbind(myreturn,
-                      data.frame(Name = "Renv Lockfile",
-                                 Value = lockfile))
+                      data.frame(Name = "Lockfile",
+                                 Value = normalizePath(lockfile))
+    )
   }
   
-  
-  
-  return(myreturn)
+  # check for python lockfile info
+  if ( 'Python' %in% names(myresult$lockfile) ) {
+    myreturn <- rbind(myreturn,
+                      data.frame(Name = "Python Version",
+                                 Value = myresult$lockfile$Python$Version),
+                      data.frame(Name = "Python Type",
+                                 Value = myresult$lockfile$Python$Type)
+    )
+    
+    if ( myresult$lockfile$Python$Type %in% c('virtualenv','conda') ) {
+      myreturn <- rbind(myreturn,
+                        data.frame(Name = "Python Lockfile",
+                                   Value = normalizePath(myresult$lockfile$Python$Name)
+                        )
+      )
+    }
+  }
+
+    return(myreturn)
 }
