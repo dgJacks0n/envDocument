@@ -37,9 +37,12 @@
 #' @return If output = return (default): A data frame with columns for information 
 #'   type, variable name and value.  NULL for output = print or output = table
 #'  
-#' @examples
+#' @examples 
+#' \dontrun{ 
+#'  # Note that these only work when called in a script or markdown document
 #'  env_doc("print") # print information to stdout
 #'  info <- env_doc() # return information as a consolidated data frame
+#'  }
 #' @export
 #' 
 env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
