@@ -64,6 +64,9 @@ If output = return (default): A data frame with columns for information
 - Git hash, status and tag (if any; requires package git2r)
 }
 \examples{
+\dontrun{ 
+ # Note that these only work when called in a script or markdown document
  env_doc("print") # print information to stdout
  info <- env_doc() # return information as a consolidated data frame
+ }
 }
