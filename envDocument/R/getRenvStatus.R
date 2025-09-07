@@ -68,7 +68,8 @@ getRenvStatus <- function(project_root = NA) {
     if ( myresult$lockfile$Python$Type %in% c('virtualenv','conda') ) {
       myreturn <- rbind(myreturn,
                         data.frame(Name = "Python Lockfile",
-                                   Value = normalizePath(myresult$lockfile$Python$Name)
+                                   Value = normalizePath(myresult$lockfile$Python$Name,
+                                                         mustWork = F)
                         )
       )
     }
