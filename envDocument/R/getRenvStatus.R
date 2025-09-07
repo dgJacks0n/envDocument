@@ -9,7 +9,6 @@
 
 getRenvStatus <- function(project_root = NA) {
   # check that `renv` is installed:
-  # check whether git2r is installed
   if (!requireNamespace("renv", quietly = TRUE)) {
     warning("Package renv is needed by getRenvStatus Please install it or call env_doc(renv = FALSE).",
             call. = FALSE)
@@ -17,35 +16,28 @@ getRenvStatus <- function(project_root = NA) {
   }
   
   # If project_root was supplied is it valid?
-  # otherwise set to NULL so renv::status will look for it
+  # otherwise use here::here()
   if(!(is.na(project_root))) {
     if(!dir.exists(project_root)) {
       warning("Project root directory does not exist")
       return(infoNotFound())
     }
   } else {
-    project_root <- NULL
-    #project_root <- here::here()
+    project_root <- here::here()
+   }
+  
+ # silently capture renv::status
+  utils::capture.output(myresult <- renv::status(project_root), 
+                        file = nullfile())
+
+  mystatus <- if(myresult$synchronized) {
+    "Synchronized"
+  } else {
+    "Out of sync"
   }
   
-  
-  # Use purr::quietly to capture results and output from renv::status
-  #q_status <- purrr::quietly(renv::status)
-  
-  #myresult <- q_status(project_root)
-  
- utils::capture.output(myresult <- renv::status(project_root), 
-                file = nullfile())
-
- # also get output message renv:status prints
-  myoutput <- utils::capture.output(renv::status(project_root))
-  
-  myoutput <- grep("\\w+", myoutput, value = TRUE)
-  
-  myoutput <- paste(myoutput, collapse = "\n")
-  
-  myreturn <- data.frame(Name = "Renv Status",
-                         Value = myoutput)
+  myreturn <- data.frame(Name = "Status",
+                         Value = mystatus)
   
   # add lockfile
   # note: renv::paths$lockfile() returns the file name it's looking for
@@ -57,6 +49,11 @@ getRenvStatus <- function(project_root = NA) {
                       data.frame(Name = "Lockfile",
                                  Value = normalizePath(lockfile))
     )
+  } else {
+    myreturn <- rbind(myreturn,
+                      data.frame(Name = "Lockfile",
+                                 Value = paste("Not found at",
+                                               normalizePath(lockfile))))
   }
   
   # check for python lockfile info
