@@ -59,6 +59,10 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
     envinfo$R <- get_Rversion()
   }
   
+  if(renv) {
+    envinfo$Renv <- getRenvStatus()
+  }
+  
   if(packages) {
     envinfo$Packages <- getPackageInfo()
   }
@@ -71,8 +75,10 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
     envinfo$Git <- getGitInfo()
   }
   
-  if(renv) {
-    envinfo$Renv <- getRenvStatus()
+  # add QUARTO_ROOT if available
+  if( Sys.getenv("QUARTO_PROJECT_ROOT") != "" ) {
+    envinfo$Quarto = data.frame( Name = "Quarto Project Root",
+                                 Value = Sys.getenv("QUARTO_PROJECT_ROOT"))
   }
   
   # should we include domino table?

@@ -2,7 +2,7 @@
 #'   If it is, get project status.
 #'   Requires that \code{renv} be installed and active.
 #' 
-#' @param project_root Project root directory (optional); defalults to value
+#' @param project_root Project root directory (optional); defaults to value
 #'   from \code{here::here()}
 #'   
 #' @export
