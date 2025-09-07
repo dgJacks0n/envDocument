@@ -9,7 +9,7 @@
 getRenvStatus(project_root = NA)
 }
 \arguments{
-\item{project_root}{Project root directory (optional); defalults to value
+\item{project_root}{Project root directory (optional); defaults to value
 from \code{here::here()}}
 }
 \description{
