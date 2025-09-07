@@ -26,6 +26,8 @@
 #'   \code{\link{getScriptInfo}}? Boolean, default TRUE
 #' @param git Include git repository information from \code{\link{getGitInfo}}
 #'   (note: requires \code{git2r})?  Boolean, default TRUE
+#' @param renv Include \code{renv} status information from 
+#'  \code{\link{getRenvStatus}}? Boolean, default TRUE 
 #' @param domino Include Domino Datalab run information from 
 #'   \code{\link{getDominoInfo}}?  Character, values:
 #'   auto - include if available; 
@@ -35,13 +37,17 @@
 #' @return If output = return (default): A data frame with columns for information 
 #'   type, variable name and value.  NULL for output = print or output = table
 #'  
-#' @examples
+#' @examples 
+#' \dontrun{ 
+#'  # Note that these only work when called in a script or markdown document
 #'  env_doc("print") # print information to stdout
 #'  info <- env_doc() # return information as a consolidated data frame
+#'  }
 #' @export
 #' 
 env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version=TRUE, 
-                      packages=TRUE, script=TRUE, git = TRUE, domino = c("auto", "on", "off")) {
+                      packages=TRUE, script=TRUE, git = TRUE, 
+                      renv=TRUE, domino = c("auto", "on", "off")) {
   
   envinfo <- list()
   
@@ -51,6 +57,10 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   
   if(version) {
     envinfo$R <- get_Rversion()
+  }
+  
+  if(renv) {
+    envinfo$Renv <- getRenvStatus()
   }
   
   if(packages) {
@@ -63,6 +73,12 @@ env_doc <- function ( output=c("return", "print", "table"), system=TRUE, version
   
   if(git) {
     envinfo$Git <- getGitInfo()
+  }
+  
+  # add QUARTO_ROOT if available
+  if( Sys.getenv("QUARTO_PROJECT_ROOT") != "" ) {
+    envinfo$Quarto = data.frame( Name = "Quarto Project Root",
+                                 Value = Sys.getenv("QUARTO_PROJECT_ROOT"))
   }
   
   # should we include domino table?

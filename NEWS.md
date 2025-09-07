@@ -1,10 +1,13 @@
 # NEWS
 
-## envDocument 2.4.1.9002
-Pre-release (test) build for version 2.4.2.  Removes support for git2r versions <= 0.21
+## envDocument 2.4.2
++ Adds status and lockfile path for renv (if used).
++ Adds support for Quarto documents in getScriptPath (requires Quarto version
+  1.7 or higher)
 
 ##  envDocument 2.4.1
-Bug fix to provide compatibility with git2r versions 0.22.1+ (S3 based) as well as <= 0.21 (S4 based)
+Bug fix to provide compatibility with git2r versions 0.22.1+ (S3 based)
+as well as <= 0.21 (S4 based)
 
 ## envDocument 2.4.0
 
@@ -16,5 +19,7 @@ Bug fix to provide compatibility with git2r versions 0.22.1+ (S3 based) as well 
 + Implemented `try()` calls to handle missing file/package errors more gracefully and consistently.
 
 ## envDocument 2.3.0
-This is the first CRAN submission for package envDocument.  The version number for this first submission is 2.3.0 for consistency with previous internal versions of this package.
+This is the first CRAN submission for package envDocument.  
+The version number for this first submission is 2.3.0 for consistency with 
+previous internal versions of this package.
 

@@ -10,11 +10,11 @@ Provides a function \code{\link{env_doc}} that collects information on the
 script, environment and system that performed an analysis.
 }
 \details{
-Returns a data frame with information on:
+Returns a data frame with information on:  
 
-- R version
+ - R version  
 
-- Attacheded packages and version   
+ - Attacheded packages and version   
  
  - OS, version and user
  
@@ -34,6 +34,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Donald Jackson \email{donald.jackson@bms.com}
+\strong{Maintainer}: Donald Jackson \email{14615921+dgJacks0n@users.noreply.github.com}
 
 }

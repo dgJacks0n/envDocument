@@ -18,7 +18,7 @@ getScriptInfo <- function() {
   mtime <- NA
   path <- try(getScriptPath(), silent = TRUE)
   
-  if (class(path) == "try-error") {
+  if ( inherits(path,  "try-error") ) {
     warning(path)
     return(infoNotFound())
   } 

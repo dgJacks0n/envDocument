@@ -1,22 +1,22 @@
-# envDocument
-R package providing a method to document the working environment for a script to support Reproducible Research
+envDocument
+================
 
-Provides method env_doc() which collects information on the system (OS, version, user), attached packages (name, source, version), 
-R version and script (working directory, script path and modification time) and organizes them into a single data frame for manipulation
-and/or formatting (for example with `knitr::kable()`)
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+A R package to report various aspects of the environment in which an analysis was run. This includes system information, packages used, working directory, script path and git repository (if any; uses git2r).
 
-# Changes
-See the changes described in [envDocument/NEWS.md](envDocument/NEWS.md) for a summary of version-to-version changes
+Output can be returned as a data table, printed, or formatted using `knitr::kable`.
 
-# Installation
-Recommended: install from CRAN.  See https://cran.r-project.org/package=envDocument
+Usage
+=====
 
-Alternatives: Either download the current .tar.gz file from the [packageReleases](packageReleases) directory or use the following R console command:  
+``` r
 
+# get environment information as a data frame
+info <- env_doc()
+
+# format environment information as a table
+env_doc("table")
+
+# print environment information
+env_doc("print")
 ```
-devtools::install_git("https://github.com/dgJacks0n/envDocument", subdir="envDocument") 
-```
-
-*Note: due to a known bug in git2r installation from a specified tag does not work*  
-
-

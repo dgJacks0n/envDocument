@@ -16,7 +16,7 @@ getRepo <- function(testPath = NA) {
     testPath <- try(getScriptPath(), silent = TRUE)
     
     # did that work?
-    if(class(testPath) == "try-error") {
+    if( inherits(testPath, "try-error")) {
       stop(testPath)
     }
   }
@@ -35,7 +35,7 @@ getRepo <- function(testPath = NA) {
   
   repo <- git2r::repository(repoPath)
   
-  if(class(repo) != "git_repository") {
+  if( !(inherits(repo, "git_repository") ) ) {
     stop("Unable to locate a git repository for", testPath)
   }
   

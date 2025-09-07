@@ -10,7 +10,9 @@
 There were no ERRORs or WARNINGs 
 
 NOTES
-This is update relase 2.4.1.  It provides compatibility for current S3-based releases of git2r and for older S4-based releases of git2r.
+This is update release 2.4.2.  It provides a new function to get status of the
+renv lockfile if used. It also determines the path and filename of 
+Quarto markdown documents (requires quarto version 1.7 or higher)
 
 ## Reverse Dependency Checks
 From devtools::revdep_check()

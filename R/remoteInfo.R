@@ -8,7 +8,7 @@ remoteInfo <- function(repo) {
   # get remote based on local head
   local <- try(git2r::repository_head(repo)) 
   
-  if(class(local) == "try_error" | is.null(local)) {
+  if( inherits(local, "try_error") | is.null(local)) {
     return(infoNotFound())
   }
   

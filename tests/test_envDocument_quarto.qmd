@@ -1,0 +1,39 @@
+---
+title: "test_envDocument"
+format: html
+project:
+  execute-dir: project
+  
+---
+
+Rmarkdown file to test envDocument::env_doc() from a Quarto document.
+
+Note: this requires Quarto version 1.7 or higher
+
+```{r}
+#| label: setup
+
+library(envDocument) # build & reload doesn't automatically knit .rmd files
+library(knitr)
+```
+
+Calling `env_doc` without an output will return a single data frame that can be printed using `knitr::kable` or other output formatting utilities.  
+
+```{r get_df}
+info <- env_doc()
+
+kable(env_doc()) # with git2r installed
+
+# kable(env_doc(git = FALSE)) # without git2r
+```
+
+New option in v2.2: option "table" pretty-prints each section separately.
+Requires `knitr`.  Specify `results = "asis"` in knitr chunk options to make sure
+table is formatted in markdown (no leading ##).
+
+```{r table, results = "asis"}
+env_doc("table")
+
+```
+
+End of test

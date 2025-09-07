@@ -4,9 +4,16 @@
 \alias{env_doc}
 \title{Report the working environment in which an analysis was performed.}
 \usage{
-env_doc(output = c("return", "print", "table"), system = TRUE,
-  version = TRUE, packages = TRUE, script = TRUE, git = TRUE,
-  domino = c("auto", "on", "off"))
+env_doc(
+  output = c("return", "print", "table"),
+  system = TRUE,
+  version = TRUE,
+  packages = TRUE,
+  script = TRUE,
+  git = TRUE,
+  renv = TRUE,
+  domino = c("auto", "on", "off")
+)
 }
 \arguments{
 \item{output}{How should output be handled? Character, values: 
@@ -30,6 +37,9 @@ Boolean, default TRUE}
 \item{git}{Include git repository information from \code{\link{getGitInfo}}
 (note: requires \code{git2r})?  Boolean, default TRUE}
 
+\item{renv}{Include \code{renv} status information from 
+\code{\link{getRenvStatus}}? Boolean, default TRUE}
+
 \item{domino}{Include Domino Datalab run information from 
 \code{\link{getDominoInfo}}?  Character, values:
 auto - include if available; 
@@ -45,15 +55,18 @@ If output = return (default): A data frame with columns for information
 - System version (OS, version, user, working directory)
 }
 \details{
-- R version
+- R version  
 
-- Package names and versions
+- Package names and versions  
 
-- Top-level script name and modification time
+- Top-level script name and modification time  
 
 - Git hash, status and tag (if any; requires package git2r)
 }
 \examples{
+\dontrun{ 
+ # Note that these only work when called in a script or markdown document
  env_doc("print") # print information to stdout
  info <- env_doc() # return information as a consolidated data frame
+ }
 }
