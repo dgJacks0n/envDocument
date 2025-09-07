@@ -26,7 +26,7 @@ getGitInfo <- function(scriptpath = NA) {
   if(is.na(scriptpath)) {
     scriptpath <- try(getScriptPath(), silent = TRUE)
     
-    if(class(scriptpath) == "try-error") {
+    if( inherits(scriptpath, "try-error") ) {
       warning("Unable to look up git information; could not determine calling script\n",
               scriptpath)
       return(infoNotFound())
@@ -35,7 +35,7 @@ getGitInfo <- function(scriptpath = NA) {
   
   scriptRepo <- try(getRepo(scriptpath), silent = TRUE)
   
-  if(class(scriptRepo) == "try-error") {
+  if( inherits(scriptRepo, "try-error") ) {
     warning(scriptRepo)
     return(infoNotFound())
   }
@@ -43,13 +43,13 @@ getGitInfo <- function(scriptpath = NA) {
   # get branch information.  
   local <- try(git2r::repository_head(scriptRepo)) 
 
-  if(class(local) == "try_error" | is.null(local)) {
+  if( inherits(local, "try_error") | is.null(local)) {
     return(infoNotFound())
   }
   
   branchname <- try(local$name, silent = TRUE)
   
-  if(class(branchname) == "try-error" | is.null(branchname)) {
+  if( inherits(branchname, "try-error") | is.null(branchname)) {
     branchname <- infoNotFound()
   }
   

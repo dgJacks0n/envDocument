@@ -7,7 +7,7 @@ fileStatus <- function(repo, testPath) {
   # need to get top level path for repo
   repoPath <- try(repo$path, silent = TRUE)
   
-  if(class(repoPath) == "try-error") {
+  if( inherits(repoPath, "try-error") ) {
     return(infoNotFound())
   }
   
