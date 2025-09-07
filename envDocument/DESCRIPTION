@@ -1,7 +1,7 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.4.2.rc1
+Version: 2.4.2
 Date: 2025-09-06
 Authors@R: person("Donald", "Jackson", email = "14615921+dgJacks0n@users.noreply.github.com",
                   role = c("aut", "cre"))
