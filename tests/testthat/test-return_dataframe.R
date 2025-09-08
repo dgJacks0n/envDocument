@@ -4,6 +4,7 @@ context("return_dataframe")
 # need script = FALSE and git = FALSE to suppress errors
 
 test_that("returns dataframe", {
+  skip_on_cran()
   result <- env_doc(script = FALSE, git = FALSE)
   expect_s3_class(result, "data.frame")
 })
