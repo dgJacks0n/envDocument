@@ -8,3 +8,5 @@ LICENSE.txt
 ^README\.Rmd$
 ^README-.*\.png$
 ^revdep$
+^doc$
+^Meta$
