@@ -4,3 +4,5 @@
 *.html
 /envDocument/envDocument.Rproj
 envDocument.Rproj
+/doc/
+/Meta/
