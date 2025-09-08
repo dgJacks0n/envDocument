@@ -17,6 +17,7 @@ Suggests:
     stringr(>= 1.2.0),
     testthat(>= 1.0.2)
 RoxygenNote: 7.3.3
+Encoding: UTF-8
 VignetteBuilder: knitr
 Imports:
       git2r(>= 0.22.1),
