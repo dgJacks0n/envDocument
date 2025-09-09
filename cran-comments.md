@@ -1,10 +1,14 @@
 ## Test environments
-* local OSX 10.14 install, R 3.5.1 (64 bit)
-* Linux 2.6.32-431.23.3.el6.x86_64
-* Ubuntu Linux 16.04 LTS, R-devel, GCC on builder.r-hub.io
-* Ubuntu Linux 16.04 LTS, R-release, GCC on builder.r-hub.io
-* Windows Server 2008 R2 SP1, R-devel, 32/64 bit on builder.r-hub.io
+Tests were run using rhub::rhub_check()
 
+* linux: All R versions on GitHub Actions ubuntu-latest
+* m1-san: All R versions on GitHub Actions macos-15, ASAN + UBSAN on macOS
+* macos-arm64: All R versions on GitHub Actions macos-latest
+* windows: All R versions on GitHub Actions windows-latest
+* ubuntu-next: R version 4.5.1 Patched (2025-08-23 r88798) on Ubuntu 22.04.5 LTS
+* ubuntu-release: R version 4.5.1 (2025-06-13) on Ubuntu 22.04.5 LTS
+
+Local test: R version 4.2.2 (2022-10-31) on Mac OsX darwin20
 
 ## R CMD check results
 There were no ERRORs or WARNINGs 
@@ -15,6 +19,6 @@ renv lockfile if used. It also determines the path and filename of
 Quarto markdown documents (requires quarto version 1.7 or higher)
 
 ## Reverse Dependency Checks
-From devtools::revdep_check()
+From devtools::revdep()
 
-No ERRORs or WARNINGs found 
+character(0)
