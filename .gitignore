@@ -1,6 +1,7 @@
 .Rproj.user
 .Rhistory
 .RData
+*.Rproj
 *.html
 /envDocument/envDocument.Rproj
 envDocument.Rproj

@@ -10,3 +10,5 @@ LICENSE.txt
 ^revdep$
 ^doc$
 ^Meta$
+.gitignore
+.github
