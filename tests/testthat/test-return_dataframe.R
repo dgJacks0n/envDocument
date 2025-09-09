@@ -5,7 +5,8 @@ context("return_dataframe")
 
 test_that("returns dataframe", {
   skip_on_cran()
-  result <- env_doc(script = FALSE, git = FALSE)
+  result <- env_doc(output = "return", script = FALSE, 
+                    git = FALSE, renv = FALSE)
   expect_s3_class(result, "data.frame")
 })
 
