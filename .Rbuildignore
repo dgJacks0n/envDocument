@@ -12,3 +12,4 @@ LICENSE.txt
 ^Meta$
 .gitignore
 .github
+^CRAN-SUBMISSION$
