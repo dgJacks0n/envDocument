@@ -18,6 +18,9 @@
 getScriptPath <- function(absolute = TRUE) {
   path <- NULL
 
+  # also track what method was used
+  path_method <- NULL
+
   # location of script can depend on how it was invoked:
   # quarto render puts it in environment variables but ONLY
   # for versions >= 1.7
@@ -31,9 +34,14 @@ getScriptPath <- function(absolute = TRUE) {
         Sys.getenv("QUARTO_DOCUMENT_FILE")
       )
     )
+
+    path_method <- 'quarto'
   } else if (!is.null(knitr::current_input())) {
     # next try knitr::current input for Rmarkdown and for Quarto versions <1.7
     path <- knitr::current_input(dir = T)
+
+    path_method <- 'knitr'
+
     # change extension if quarto project?
     if (!is.na(Sys.getenv("QUARTO_DOCUMENT_PATH", NA))) {
       path <- sub("\\.rmarkdown$", ".qmd", path)
@@ -43,10 +51,14 @@ getScriptPath <- function(absolute = TRUE) {
     if (!is.null(sys.calls())) {
       # get name of script - hope this is consistent!
       path <- as.character(sys.call(1))[2]
+
+      path_method <- 'sys.calls'
     } else {
       # Rscript and R -f put it in commandArgs
       args <- commandArgs(trailingOnly = FALSE)
       path <- args
+
+      path_method <- 'commandArgs'
     }
   }
 
@@ -57,9 +69,9 @@ getScriptPath <- function(absolute = TRUE) {
   # make sure we got a file that ends in .R, .Rmd or .Rnw
   if (!(grepl(".+[R|Rmd|Rnw|Qmd]$", path, perl = TRUE, ignore.case = TRUE))) {
     stop(
-      "Obtained value for path <",
-      path,
-      "> does not end with .R, .Rmd, .Qmd or .Rnw: ",
+      "Obtained value for path from ",
+      path_method,
+      " does not end with .R, .Rmd, .Qmd or .Rnw: ",
       path
     )
   }
