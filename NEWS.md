@@ -1,5 +1,9 @@
 # NEWS
 
+## envDocument 2.4.3
++ Fix issue with getScriptPath not returning valid paths with Quarto documents 
+  under Quarto version >= 1.10
+
 ## envDocument 2.4.2
 + Adds status and lockfile path for renv (if used).
 + Adds support for Quarto documents in getScriptPath (requires Quarto version
