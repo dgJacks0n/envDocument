@@ -36,4 +36,9 @@ Useful links:
 \author{
 \strong{Maintainer}: Donald Jackson \email{14615921+dgJacks0n@users.noreply.github.com}
 
+Authors:
+\itemize{
+  \item Donald Jackson \email{14615921+dgJacks0n@users.noreply.github.com}
+}
+
 }
