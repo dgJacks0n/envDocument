@@ -1,8 +1,8 @@
 Package: envDocument
 Type: Package
 Title: Document the R Working Environment
-Version: 2.4.3
-Date: 2026-10-06
+Version: 2.4.3.1
+Date: 2026-10-30
 Authors@R: person("Donald", "Jackson", email = "14615921+dgJacks0n@users.noreply.github.com",
                   role = c("aut", "cre"))
 Description: Prints out information about the R working environment
@@ -24,4 +24,4 @@ Imports:
       utils,
       renv(>= 1.1.4),
       here
-Config/roxygen2/version: 8.1.0
+Config/roxygen2/version: 8.1.1
