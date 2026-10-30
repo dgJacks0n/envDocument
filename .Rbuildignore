@@ -2,7 +2,7 @@
 ^renv\.lock$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.R\test_envDocument
+^tests/test_envDocument_quarto_files$
 cran-comments.md
 LICENSE.txt
 ^README\.Rmd$
@@ -13,3 +13,4 @@ LICENSE.txt
 .gitignore
 .github
 ^CRAN-SUBMISSION$
+^\.Rprofile$
