@@ -16,8 +16,8 @@ to working directory (FALSE)}
 or NULL if path is not available
 }
 \examples{
-\dontrun{ 
-mypath <- getScriptPath() 
+\dontrun{
+mypath <- getScriptPath()
 }
 
 }
